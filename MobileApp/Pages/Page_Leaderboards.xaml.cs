@@ -60,9 +60,7 @@ namespace MobileApp
                 Seasons.Add(season);
             }
             SeasonPicker.SelectedIndex = 0;
-
-        }
-    
+        }    
 
         private void SeasonPicker_SelectedIndexChanged(object sender, EventArgs e)
         {

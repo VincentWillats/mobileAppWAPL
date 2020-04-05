@@ -28,17 +28,21 @@
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="20*"/>
             </Grid.RowDefinitions>
-            <Frame Grid.Row="0" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Upcoming Tournaments" TextColor="Gold" BackgroundColor="black" ClassId="upcomingTournaments" Pressed="Button_Pressed"/>
+            <Frame Grid.Row="0" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1" >
+                <Button Text="Upcoming Tournamedsdsdsdsdsdsdsdsdsdnts" TextColor="Gold" BackgroundColor="black" Padding="0"
+                          ClassId="upcomingTournaments" Pressed="Button_Pressed" x:Name="upComingTournamentsBtn"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
             </Frame>
             <Frame Grid.Row="2" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Leaderboards" TextColor="Gold" BackgroundColor="black" ClassId="Leaderboards" Pressed="Button_Pressed"/>
+                <Button Text="Leaderboards" TextColor="Gold" BackgroundColor="black" ClassId="Leaderboards" Pressed="Button_Pressed"
+                        x:Name="leaderboardsBtn"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
             </Frame>
             <Frame Grid.Row="3" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Results" TextColor="Gold" BackgroundColor="black" ClassId="results" Pressed="Button_Pressed"/>
+                <Button Text="Results" TextColor="Gold" BackgroundColor="black" ClassId="results" Pressed="Button_Pressed"
+                        x:Name="resultsBtn"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
             </Frame>
             <Frame Grid.Row="4" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Player Search" TextColor="Gold" BackgroundColor="black" ClassId="playerSearch" Pressed="Button_Pressed"/>
+                <Button Text="Player Search" TextColor="Gold" BackgroundColor="black" ClassId="playerSearch" Pressed="Button_Pressed"
+                        x:Name="playerSearchBtn"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
             </Frame>
                     
         </Grid>

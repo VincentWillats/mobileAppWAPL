@@ -95,7 +95,7 @@
                                    HorizontalOptions="Center"/>
                             <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                         BackgroundColor="Gold" />
-                            <ActivityIndicator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Color="Gold" x:Name="activityIndicator" IsRunning="False" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <ActivityIndicator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Color="Gold" x:Name="activityIndicator" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center"/>
                             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                             ItemsSource="{Binding LeaderboardEntries}"
                             HasUnevenRows="True" BackgroundColor="Transparent"

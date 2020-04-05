@@ -18,6 +18,7 @@ using Xamarin.Forms;
  * Contact Email:   Vincentwillats.software@gmail.com
  * 
  * Changelog:
+ * 05/03/2020 -- Working Leaderboard button
  * 30/03/2020 -- Working Player Search button
  * 29/03/2020 -- Working Recent Result button
  * 28/03/2020 -- File made, Working Upcoming Tournament button
@@ -28,9 +29,12 @@ namespace MobileApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        FontSizeController fontSizeController = new FontSizeController();
         public MainPage()
         {
+            //SetFontSize();
             InitializeComponent();
+            SetFontSizes();
         }
 
         private async void Button_Pressed(object sender, EventArgs e)
@@ -51,6 +55,14 @@ namespace MobileApp
                     await Navigation.PushAsync(new Page_PlayerSearch());
                     break;
             }
+        }
+
+        private void SetFontSizes()
+        {
+            fontSizeController.SetFontSize(ref upComingTournamentsBtn);
+            fontSizeController.SetFontSize(ref leaderboardsBtn);
+            fontSizeController.SetFontSize(ref resultsBtn);
+            fontSizeController.SetFontSize(ref playerSearchBtn);
         }
     }
 }
