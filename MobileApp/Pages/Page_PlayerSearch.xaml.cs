@@ -75,6 +75,7 @@ namespace MobileApp
             ListView listView = (ListView)sender;
 
             DisplayPlayerProfile(listView.SelectedItem);
+            listView.SelectedItem = null;
         }
 
         private async void DisplayPlayerProfile(object playerObj)

@@ -46,6 +46,8 @@ namespace MobileApp
             if (listView.SelectedItem != null)
             {               
                 DisplayEventDetails(new Popup_UpcomingTournaments(listView.SelectedItem));
+                listView.SelectedItem = null;
+
             }
         }
 

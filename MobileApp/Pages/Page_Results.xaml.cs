@@ -45,7 +45,9 @@ namespace MobileApp
             if (listView.SelectedItem != null)
             {
                 DisplayResultDetails(new Popup_Result(listView.SelectedItem));
+                listView.SelectedItem = null;
             }
+            
         }
         
 

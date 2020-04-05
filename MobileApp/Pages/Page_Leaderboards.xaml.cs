@@ -12,11 +12,11 @@ namespace MobileApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page_Leaderboards : ContentPage
-    { 
-       
-        public ObservableCollection<Data_LeaderboardEntry> LeaderboardEntries{ get; private set; }
+    {
+        public ObservableCollection<Data_LeaderboardEntry> LeaderboardEntries { get; private set; }
         public ObservableCollection<int> Seasons { get; private set; }
 
+        Data_LeaderboardEntry selectedEntry = null;
 
         Controller_SQL sqlController = new Controller_SQL();
 
@@ -37,10 +37,14 @@ namespace MobileApp
         private async void LoadSesonLeaderboard(int seasonID)
         {
             activityIndicator.IsRunning = true;
-            List<Data_LeaderboardEntry> _leaderboardEntry = new List<Data_LeaderboardEntry>();
-            _leaderboardEntry = await sqlController.LoadLeaderboardStats(seasonID);
-            foreach(Data_LeaderboardEntry entry in _leaderboardEntry)
+            LeaderboardEntries.Clear();
+            int posCount = 1;
+            List<Data_LeaderboardEntry> _leaderboardEntries = new List<Data_LeaderboardEntry>();
+            _leaderboardEntries = await sqlController.LoadLeaderboardStats(seasonID);
+            foreach(Data_LeaderboardEntry entry in _leaderboardEntries)
             {
+                entry.Position = posCount;
+                posCount++;
                 LeaderboardEntries.Add(entry);
             }
             activityIndicator.IsRunning = false;
@@ -48,6 +52,7 @@ namespace MobileApp
 
         private async void LoadSeasonList()
         {
+            //activityIndicator.IsRunning = true;
             List<int> _seasonsPlayedIn = new List<int>();
             _seasonsPlayedIn = await sqlController.LoadSeasonList();
             foreach (int season in _seasonsPlayedIn)
@@ -77,6 +82,29 @@ namespace MobileApp
         private void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
         {
             Navigation.PopAsync();
+        }
+
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            ListView listView = (ListView)sender;
+            Data_LeaderboardEntry result = (Data_LeaderboardEntry)listView.SelectedItem;
+            if(result == selectedEntry)
+            {
+                LoadPlayerProfile(result.player, result.SeasonID);
+                listView.SelectedItem = null;
+            }
+            else
+            {
+                selectedEntry = result;
+            }
+
+            
+
+        }
+
+        private async void LoadPlayerProfile(object player, int seasonID)
+        {
+            await Navigation.PushAsync(new Page_PlayerProfile(player, seasonID));
         }
     }
 }

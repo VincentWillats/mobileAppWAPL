@@ -21,7 +21,7 @@ using System.Linq;
  * Contact Email:   Vincentwillats.software@gmail.com
  * 
  * Changelog:
- * 
+ * 05/04/2020 -- Added LoadLeaderboardStats, LoadSeasonList
  * 30/03/2020 -- Updated to work with Actual Database structure of WAPL
  * 29/03/2020 -- Working LoadResultsAsync(), LoadPlayerSearchedListAsync()
  * 28/03/2020 -- File made, working LoadUpcomngTournamentsAsync();
@@ -111,7 +111,6 @@ namespace MobileApp
             Data_PlayerStats playerStats = new Data_PlayerStats();
             string funcName = "GetPlayerStats";
             var searchIDs = new StringContent(playerID.ToString() + "+" + seasonID.ToString());
-            //var strSeasonID = new StringContent(seasonID.ToString());
 
             HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, searchIDs);
             response.EnsureSuccessStatusCode();
@@ -132,6 +131,33 @@ namespace MobileApp
             System.Diagnostics.Debug.WriteLine(responseBody);
             seasonsPlayedIn = JsonConvert.DeserializeObject<List<int>>(responseBody);
             return seasonsPlayedIn;
+        }
+
+        public async Task<List<int>> LoadSeasonList()
+        {
+            List<int> seasons = new List<int>();
+            string funcName = "GetSeasonList";
+            HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine(responseBody);
+            seasons = JsonConvert.DeserializeObject<List<int>>(responseBody);
+            return seasons;
+        }
+
+
+        public async Task<List<Data_LeaderboardEntry>> LoadLeaderboardStats(int seasonID)
+        {
+            string funcName = "GetLeaderboardEntries";
+            List<Data_LeaderboardEntry> leaderboardEntries = new List<Data_LeaderboardEntry>();
+
+            var strTournyID = new StringContent(seasonID.ToString());
+
+            HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strTournyID);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            leaderboardEntries = JsonConvert.DeserializeObject<List<Data_LeaderboardEntry>>(responseBody);
+            return leaderboardEntries;
         }
     }
 }

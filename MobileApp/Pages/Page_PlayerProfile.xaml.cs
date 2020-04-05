@@ -14,6 +14,7 @@ namespace MobileApp
     public partial class Page_PlayerProfile : ContentPage
     {
         Data_Player player;
+        int seasonID = -1;
         public Data_PlayerStats PlayerStats { get; private set; }
         public ObservableCollection<Data_Stat> StatsToShow { get; private set; }
         public ObservableCollection<int> SeasonsPlayedIn { get; private set; }
@@ -26,15 +27,27 @@ namespace MobileApp
             player = (Data_Player)playerObj;
             StatsToShow = new ObservableCollection<Data_Stat>();
             SeasonsPlayedIn = new ObservableCollection<int>();
-
             
             LoadPlayerSeasonsPlayedList(player.PlayerID); 
             BindingContext = this;
 
             InitializeComponent();
             NameLabel.Text = player.FullName;
+        }
 
-        }        
+        public Page_PlayerProfile(object playerObj, int _seasonID)
+        {
+            player = (Data_Player)playerObj;
+            seasonID = _seasonID;
+            StatsToShow = new ObservableCollection<Data_Stat>();
+            SeasonsPlayedIn = new ObservableCollection<int>();
+
+            LoadPlayerSeasonsPlayedList(player.PlayerID);
+            BindingContext = this;
+
+            InitializeComponent();
+            NameLabel.Text = player.FullName;
+        }
 
         private async void LoadPlayerStats(int playerID, int seasonID)
         {
@@ -55,7 +68,15 @@ namespace MobileApp
             {
                 SeasonsPlayedIn.Add(season);
             }          
-            SeasonPicker.SelectedIndex = 0;
+            if(seasonID == -1)
+            {
+                SeasonPicker.SelectedIndex = 0;
+            }
+            else
+            {
+                SeasonPicker.SelectedItem = seasonID;
+            }
+            
 
         }
 
