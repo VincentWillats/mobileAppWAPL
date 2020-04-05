@@ -41,7 +41,8 @@ namespace MobileApp
                 case "upcomingTournaments":
                     await Navigation.PushAsync(new Page_UpcomingTournaments());
                     break;
-                case "venues":
+                case "Leaderboards":
+                    await Navigation.PushAsync(new Page_Leaderboards());
                     break;
                 case "results":
                     await Navigation.PushAsync(new Page_Results());

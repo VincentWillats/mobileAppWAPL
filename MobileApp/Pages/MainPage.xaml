@@ -32,7 +32,7 @@
                 <Button Text="Upcoming Tournaments" TextColor="Gold" BackgroundColor="black" ClassId="upcomingTournaments" Pressed="Button_Pressed"/>
             </Frame>
             <Frame Grid.Row="2" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Venues" TextColor="Gold" BackgroundColor="black" ClassId="venues" Pressed="Button_Pressed"/>
+                <Button Text="Leaderboards" TextColor="Gold" BackgroundColor="black" ClassId="Leader" Pressed="Button_Pressed"/>
             </Frame>
             <Frame Grid.Row="3" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
                 <Button Text="Results" TextColor="Gold" BackgroundColor="black" ClassId="results" Pressed="Button_Pressed"/>
