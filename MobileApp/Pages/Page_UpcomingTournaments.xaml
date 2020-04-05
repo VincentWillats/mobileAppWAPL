@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             NavigationPage.HasNavigationBar="false"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Page_UpcomingTournaments">
+    <Grid BackgroundColor="Black">
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
+            <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+
+        </Grid.GestureRecognizers>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="28*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="55*"/> 
+            <RowDefinition Height="11*"/>     
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="1" Source="panallogo.png" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Label Grid.Row="2" Grid.Column="1"
+               Text="Tap upcoming event for more details."
+               VerticalOptions="End"
+               HorizontalOptions="Center"
+               TextColor="Gold"
+               FontSize="Micro"/>
+        <ActivityIndicator Grid.Row="3" Grid.Column="1"
+                           HorizontalOptions="Center" VerticalOptions="Center"
+                           Color="Gold" x:Name="activityIndicator"/>
+        <Frame Grid.Row="3" Grid.Column="1" CornerRadius="5" BorderColor="Gold" BackgroundColor="Transparent" Padding="2" Margin="0">
+            
+
+            <ListView ItemsSource="{Binding UpcomingTournaments}"
+                        HasUnevenRows="True"
+                        ItemSelected="ListView_ItemSelected">
+                <!--ItemTapped="ListView_ItemTapped">-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="0.5*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                        Text="{Binding StartDate, StringFormat='{0:D}'}"
+                                        TextColor="Gold"/>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                        Text="{Binding Buyin, StringFormat='{0:C}'}"  
+                                        FontAttributes="Bold"
+                                        TextColor="Gold"
+                                        HorizontalOptions="End"/>
+                                <!--Text="{Binding Buyin, StringFormat='{0:C}'}"-->
+
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                        Text="{Binding VenueName}"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center"
+                                        TextColor="Gold"/>
+                                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding ResultListDescription}"
+                                       TextColor="Gold"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="Micro"/>
+                                <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Gray"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>            
+        </Frame>
+        <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1"
+               Text="Gaming Function by Permit issued under Section 47 of the Act for various not for profit organisations."
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"
+               TextColor="Gold"
+               FontSize="Micro"/>
+    </Grid>
+</ContentPage>
