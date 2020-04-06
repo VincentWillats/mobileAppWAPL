@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using FormsToolkit.Droid;
 
 namespace MobileApp.Droid
 {
@@ -22,6 +23,7 @@ namespace MobileApp.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Toolkit.Init();
             LoadApplication(new App());
         }
 

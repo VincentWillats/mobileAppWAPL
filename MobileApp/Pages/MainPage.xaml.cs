@@ -30,16 +30,21 @@ namespace MobileApp
     public partial class MainPage : ContentPage
     {
         FontSizeController fontSizeController = new FontSizeController();
+        List<Label> labelList = new List<Label>();
         public MainPage()
         {
-            //SetFontSize();
             InitializeComponent();
-            SetFontSizes();
+
+            labelList.Add(UpcomingTournamentsLbl);
+            labelList.Add(LeaderboardsLbl);
+            labelList.Add(resultsLbl);
+            labelList.Add(PlayerSearchLbl);
         }
 
         private async void Button_Pressed(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
+            Label button = (Label)sender;
+            System.Diagnostics.Debug.WriteLine(button.ClassId);
             switch (button.ClassId)
             {
                 case "upcomingTournaments":
@@ -56,13 +61,35 @@ namespace MobileApp
                     break;
             }
         }
+        
 
-        private void SetFontSizes()
+        private void SetFont()
         {
-            fontSizeController.SetFontSize(ref upComingTournamentsBtn);
-            fontSizeController.SetFontSize(ref leaderboardsBtn);
-            fontSizeController.SetFontSize(ref resultsBtn);
-            fontSizeController.SetFontSize(ref playerSearchBtn);
+            int minFontSize = 1000;
+            foreach(Label label in labelList)
+            {
+                int fontSize = fontSizeController.GetFontSize(label);
+                if(fontSize < minFontSize)
+                {
+                    minFontSize = fontSize;
+                }
+                System.Diagnostics.Debug.WriteLine(minFontSize.ToString());
+            }
+            
+            foreach(Label label in labelList)
+            {
+                label.FontSize = minFontSize;
+            }
+        }
+
+        private void Lbl_SizeChanged(object sender, EventArgs e)
+        {          
+            Label lbl = (Label)sender;
+            SetFont();
+            lbl.SizeChanged -= Lbl_SizeChanged;
+            //fontSizeController.SetFontSize(button);
+            ////button.SizeChanged += Btn_SizeChanged;
+
         }
     }
 }
