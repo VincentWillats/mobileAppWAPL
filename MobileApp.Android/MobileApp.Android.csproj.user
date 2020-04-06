@@ -3,6 +3,6 @@
   <PropertyGroup>
     <AndroidDesignerPreferredTheme>Theme.AppCompat.Light.NoActionBar</AndroidDesignerPreferredTheme>
     <SelectedDevice>Xiaomi Redmi Note 8 Pro</SelectedDevice>
-    <DefaultDevice>pixel_2_pie_9_0_-_api_28</DefaultDevice>
+    <DefaultDevice>phone_m-dpi_5_4in_pie_9_0_-_api_28_1</DefaultDevice>
   </PropertyGroup>
 </Project>
