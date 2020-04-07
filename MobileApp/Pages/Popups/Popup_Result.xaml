@@ -23,14 +23,15 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0"
-                    TextColor="Gold"
+            <Label Grid.Row="0" Grid.Column="0" Padding="10"
+                    TextColor="Gold" FontSize="14"
                     Text="{Binding Result.StartDate, StringFormat='{0:D}'}"                        
                     HorizontalOptions="Center"/>
-            <Label Grid.Row="1" Grid.Column="0"
+            <Label Grid.Row="1" Grid.Column="0" Padding="0,0,0,10"
                     TextColor="Gold"
                     Text="{Binding Result.Venue}"  
-                    FontSize="Medium"
+                    FontSize="17"
+                   HorizontalTextAlignment="Center"
                     HorizontalOptions="Center"/>
             <Grid Grid.Row="2" Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -44,16 +45,17 @@
                 <Label Grid.Row="0" Grid.Column="0"
                         TextColor="Gold"
                         FontAttributes="Bold"
-                        Text="Results"                       
+                        Text="Results" FontSize="14"                        
                         HorizontalOptions="Center"/>
                 <Label Grid.Row="0" Grid.Column="1"
                         TextColor="Gold"
                         FontAttributes="Bold"
-                        Text="Photos"                       
+                        Text="Photos"  FontSize="14"                      
                         HorizontalOptions="Center"/>
-                <Frame Grid.Row="1" Grid.Column="0" BorderColor="Gold" BackgroundColor="Transparent" CornerRadius="5" Padding="2" Margin="3">
+                <Frame Grid.Row="1" Grid.Column="0" BorderColor="Gold" BackgroundColor="Transparent" CornerRadius="5" Padding="2" Margin="3,0,0,3">
                     <ListView ItemsSource="{Binding ResultPlayerList}"
-                            HasUnevenRows="True">
+                            HasUnevenRows="True"
+                              ItemTapped="player_Tapped">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -61,8 +63,9 @@
                                         <Label Grid.Row="0"   
                                                 Text="{Binding ResultStr}"
                                                 FontAttributes="Bold"                                                
-                                                TextColor="Gold"
-                                                HorizontalOptions="Start"/>
+                                                TextColor="Gold" FontSize="14"
+                                                HorizontalOptions="Start">                                      
+                                        </Label>
                                     </StackLayout>               
                                 </ViewCell>
                             </DataTemplate>
@@ -70,9 +73,10 @@
                     </ListView>
                 </Frame>
                 <ActivityIndicator IsRunning="True" x:Name="activityIndicator" Grid.Row="1" Grid.Column="1"  Color="Gold" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Frame Grid.Row="1" Grid.Column="1" BorderColor="Gold" CornerRadius="5" BackgroundColor="Transparent" Margin="3" Padding="2">
+                <Frame Grid.Row="1" Grid.Column="1" BorderColor="Gold" CornerRadius="5" BackgroundColor="Transparent" Margin="0,0,3,3" Padding="2">
                 <ListView ItemsSource="{Binding ImageList}"
-                            HasUnevenRows="True">
+                            HasUnevenRows="True"
+                          ItemTapped="ListView_ItemTapped">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>                                    

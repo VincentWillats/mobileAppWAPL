@@ -16,29 +16,31 @@ namespace MobileApp
     public partial class Page_UpcomingTournaments : ContentPage
     {
         Controller_SQL sqlControl = new Controller_SQL();
+        FontSizeController fontController = new FontSizeController();
         public IList<Data_Tournament> UpcomingTournaments { get; private set; }
 
-
+        
 
         public Page_UpcomingTournaments()
         {
             InitializeComponent();
             activityIndicator.IsRunning = true;
             UpcomingTournaments = new List<Data_Tournament>();
-            LoadUpcomingTournaments();
+            LoadUpcomingTournaments();            
         }
 
         private async void LoadUpcomingTournaments()
         {
             List<Data_Tournament> _tournies = await sqlControl.LoadUpcomingTournamentsAsync();
-            foreach(Data_Tournament tourny in _tournies)
+            foreach (Data_Tournament tourny in _tournies)
             {
                 UpcomingTournaments.Add(tourny);
             }
             activityIndicator.IsRunning = false;
-
             BindingContext = this;
+       
         }
+
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

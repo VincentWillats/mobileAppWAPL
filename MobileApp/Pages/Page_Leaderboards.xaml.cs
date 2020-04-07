@@ -13,10 +13,11 @@ namespace MobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page_Leaderboards : ContentPage
     {
+        FontSizeController fontController = new FontSizeController();
         public ObservableCollection<Data_LeaderboardEntry> LeaderboardEntries { get; private set; }
         public ObservableCollection<int> Seasons { get; private set; }
 
-        Data_LeaderboardEntry selectedEntry = null;
+        Data_LeaderboardEntry selectedEntry = new Data_LeaderboardEntry();
 
         Controller_SQL sqlController = new Controller_SQL();
 
@@ -30,8 +31,6 @@ namespace MobileApp
             BindingContext = this;
 
             InitializeComponent();
-            //NameLabel.Text = player.FullName;
-
         }
 
         private async void LoadSesonLeaderboard(int seasonID)
@@ -89,7 +88,7 @@ namespace MobileApp
             if(result == selectedEntry)
             {
                 LoadPlayerProfile(result.player, result.SeasonID);
-                listView.SelectedItem = null;
+                listView.SelectedItem = new Data_LeaderboardEntry();
             }
             else
             {

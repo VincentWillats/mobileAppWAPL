@@ -13,7 +13,7 @@ namespace MobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page_PlayerProfile : ContentPage
     {
-        Data_Player player;
+        Data_Player player = new Data_Player();
         int seasonID = -1;
         public Data_PlayerStats PlayerStats { get; private set; }
         public ObservableCollection<Data_Stat> StatsToShow { get; private set; }

@@ -21,7 +21,7 @@
             HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
     <!--You can use any elements here which are extended from Xamarin.Forms.View-->
-    <Frame HorizontalOptions="CenterAndExpand" CornerRadius="5" VerticalOptions="Center" BorderColor="Gold" BackgroundColor="Black" Padding="6" >
+    <Frame HorizontalOptions="Center" CornerRadius="5" VerticalOptions="Center" BorderColor="Gold" BackgroundColor="Black" Padding="6" >
         <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -31,21 +31,21 @@
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0"
-                        TextColor="Gold"
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                        TextColor="Gold" FontSize="14"
                         Text="{Binding upcomingTournament.StartDate, StringFormat='{0:D}'}"
                         HorizontalOptions="Start"/>
                 <Label Grid.Row="0" Grid.Column="1"
-                       TextColor="Gold"
+                       TextColor="Gold" FontSize="14"
                         Text="{Binding upcomingTournament.Buyin, StringFormat='{0:C}'}"                       
                         HorizontalOptions="End"/>
                 <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                        TextColor="Gold"
-                       FontSize="Medium"
+                       FontSize="17"
                        FontAttributes="Bold"
                        Text="{Binding upcomingTournament.VenueName}"
                        HorizontalTextAlignment="Center"
@@ -53,7 +53,7 @@
             <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                        TextColor="Gold"
                        Text="{Binding upcomingTournament.ResultListDescription}"
-                       FontSize="Micro"
+                       FontSize="10"
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"/>
 
@@ -67,27 +67,31 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" 
                            Text="Address:"
                            TextColor="Gold"
-                           FontSize="Medium"
+                           FontSize="17"
                            FontAttributes="Bold"/>                   
                     <Label Grid.Row="1" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address01}"
-                           TextColor="Gold"/>
+                           TextColor="Gold"
+                           FontSize="14"/>
    
                     <Label Grid.Row="2" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address02}"
-                           TextColor="Gold"/>
+                           TextColor="Gold"
+                           FontSize="14"/>
 
                     <Label Grid.Row="3" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address03}"
-                           TextColor="Gold"/>  
+                           TextColor="Gold"
+                           FontSize="14"/>  
                     <Label Grid.Row="4" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address04}"
-                           TextColor="Gold"/>    
+                           TextColor="Gold"
+                           FontSize="14"/>    
                 </Grid>
                 <maps:Map Grid.Row="4" Grid.Column="1"  
                           MapType="Street"

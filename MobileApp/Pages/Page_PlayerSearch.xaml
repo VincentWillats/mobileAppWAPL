@@ -41,7 +41,7 @@
                        Placeholder="Enter Name Here"
                        BackgroundColor="#4D424443"
                        HorizontalTextAlignment="Center"
-                       TextColor="Gold"
+                       TextColor="Gold" FontSize="14"
                        PlaceholderColor="#4DFFD700"
                        TextChanged="Entry_TextChanged"/>
                 <StackLayout Grid.Row="1" Grid.Column="0" 
@@ -65,7 +65,7 @@
                                     <Label Grid.Row="0" Grid.Column="0"                                          
                                             Text="{Binding FullName}"
                                             FontAttributes="Bold"                                                
-                                            TextColor="Gold"
+                                            TextColor="Gold" FontSize="14"
                                             HorizontalOptions="Start"/>                                    
                                     <StackLayout Grid.Row="1" Grid.Column="0"  BackgroundColor="Gray"/>
                                 </Grid>

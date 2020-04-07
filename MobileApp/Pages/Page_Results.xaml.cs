@@ -17,6 +17,7 @@ namespace MobileApp
     public partial class Page_Results : ContentPage
     {
         Controller_SQL sqlController = new Controller_SQL();
+        FontSizeController fontController = new FontSizeController();
 
         public IList<Data_Result> Results { get; private set; }
 
@@ -60,8 +61,5 @@ namespace MobileApp
         {
             Navigation.PopAsync();
         }
-
     }
-
-
 }

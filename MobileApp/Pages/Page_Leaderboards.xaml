@@ -13,35 +13,29 @@
                 <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
             </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="55*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="51*"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="80*"/>
-                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="74*"/>
+                <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  Source="panallogo.png" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
 
-            <Label Grid.Row="2" Grid.Column="1"
-                   Text="Tap the Season number to pick another Season."
-                   VerticalOptions="End"
-                   HorizontalOptions="Center"
-                   TextColor="Gold"
-                   FontSize="Micro"
-                   Padding="0"/>
-            <Label Grid.Row="3" Grid.Column="1"
-                   Text="Double tap a player to see their stats for that Season."
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   TextColor="Gold"
-                   FontSize="Micro"
-                   Padding="0"/>
+            <Label Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3"
+                   Text="Tap the Season number to pick another Season. 
+                            
+                   Double tap a player to see their stats for that Season."
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                   VerticalTextAlignment="End" HorizontalTextAlignment="Center"
+                   TextColor="Gold" FontSize="10"/>
+          
 
             <Frame Grid.Row="4" Grid.Column="1" BackgroundColor="Black" BorderColor="Gold" Padding="5" CornerRadius="5">
                 <Grid>
@@ -57,19 +51,23 @@
 
                     <Label Grid.Row="0" Grid.Column="0" 
                            TextColor="Gold"
-                           FontSize="Large"                           
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="Season:"
-                           Padding="0,0,0,9"/>
+                           FontSize="22"                           
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="End"
+                           Margin="0,0,0,5"
+                           Text="Season:"/>
 
-                    <Picker Grid.Row="0" Grid.Column="1"
+                    <Picker Grid.Row="0" Grid.Column="1" 
                             ItemsSource="{Binding Seasons}"
                             TextColor="Gold"                            
                             x:Name="SeasonPicker"
+                            FontSize="22"
+                            Margin="0,0,0,0"
+                            HorizontalOptions="FillAndExpand"  
+                            VerticalOptions="FillAndExpand"
                             
-                            HorizontalOptions="Start"  
-                            VerticalOptions="Center"
                             TitleColor="Gold"
                             SelectedIndexChanged="SeasonPicker_SelectedIndexChanged"/>
 
@@ -87,11 +85,11 @@
 
                             <Label Grid.Row="0" Grid.Column="0"
                                    Text="Name"
-                                   TextColor="Gold"
+                                   TextColor="Gold" FontSize="14"
                                    HorizontalOptions="Center"/>
                             <Label Grid.Row="0" Grid.Column="1"
                                    Text="Points"
-                                   TextColor="Gold"
+                                   TextColor="Gold" FontSize="14"
                                    HorizontalOptions="Center"/>
                             <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                         BackgroundColor="Gold" />
@@ -116,15 +114,15 @@
                                             <Label Grid.Row="0" Grid.Column="0"
                                                     Text="{Binding PositionStr}"
                                                     FontAttributes="Bold"                                                
-                                                    TextColor="Gold"
+                                                    TextColor="Gold" FontSize="14"
                                                     HorizontalOptions="Start"/>
                                             <Label Grid.Row="0" Grid.Column="1"
                                                     Text="{Binding FullName}"                                                                                                  
-                                                    TextColor="Gold"
+                                                    TextColor="Gold" FontSize="14"
                                                     HorizontalOptions="Start"/>
                                             <Label Grid.Row="0" Grid.Column="2"
                                                     Text="{Binding SeasonPoints}"
-                                                    TextColor="Gold"
+                                                    TextColor="Gold" FontSize="14"
                                                     VerticalTextAlignment="Center"
                                                     HorizontalOptions="Center"
                                                     HorizontalTextAlignment="Start"/>

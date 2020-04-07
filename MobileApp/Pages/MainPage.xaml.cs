@@ -18,6 +18,8 @@ using Xamarin.Forms;
  * Contact Email:   Vincentwillats.software@gmail.com
  * 
  * Changelog:
+ * 07/03/2020 -- Working socials button
+ * 06/03/2020 -- Font all same size
  * 05/03/2020 -- Working Leaderboard button
  * 30/03/2020 -- Working Player Search button
  * 29/03/2020 -- Working Recent Result button
@@ -31,6 +33,7 @@ namespace MobileApp
     {
         FontSizeController fontSizeController = new FontSizeController();
         List<Label> labelList = new List<Label>();
+
         public MainPage()
         {
             InitializeComponent();
@@ -50,7 +53,7 @@ namespace MobileApp
                 case "upcomingTournaments":
                     await Navigation.PushAsync(new Page_UpcomingTournaments());
                     break;
-                case "Leaderboards":
+                case "leaderboards":
                     await Navigation.PushAsync(new Page_Leaderboards());
                     break;
                 case "results":
@@ -59,37 +62,33 @@ namespace MobileApp
                 case "playerSearch":
                     await Navigation.PushAsync(new Page_PlayerSearch());
                     break;
+                case "socials":
+                    await Navigation.PushAsync(new Page_Socials());
+                    break;
             }
         }
         
 
         private void SetFont()
         {
-            int minFontSize = 1000;
+            int minFontSize = 10000;
             foreach(Label label in labelList)
             {
-                int fontSize = fontSizeController.GetFontSize(label);
-                if(fontSize < minFontSize)
+                int fontSize = fontSizeController.GetMaxFontSize(label);
+                  if (fontSize < minFontSize)
                 {
                     minFontSize = fontSize;
                 }
-                System.Diagnostics.Debug.WriteLine(minFontSize.ToString());
-            }
-            
+            }            
             foreach(Label label in labelList)
             {
-                label.FontSize = minFontSize;
+                label.FontSize = minFontSize / 2;
             }
         }
 
-        private void Lbl_SizeChanged(object sender, EventArgs e)
+        private void Grid_SizeChanged(object sender, EventArgs e)
         {          
-            Label lbl = (Label)sender;
             SetFont();
-            lbl.SizeChanged -= Lbl_SizeChanged;
-            //fontSizeController.SetFontSize(button);
-            ////button.SizeChanged += Btn_SizeChanged;
-
         }
     }
 }
