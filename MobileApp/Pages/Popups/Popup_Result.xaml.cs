@@ -126,6 +126,19 @@ namespace MobileApp.Pages.Popups
             await Navigation.PushAsync(new Page_PlayerProfile(player));
         }
 
+        private void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
+        {            
+            PopupNavigation.Instance.PopAsync();
+        }   
+   
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PopAsync();
+        }
+
+
+
         protected override void OnAppearing()
         {
                    
@@ -183,11 +196,6 @@ namespace MobileApp.Pages.Popups
             System.Diagnostics.Debug.WriteLine("BACK GROUND CLICKED");
             PopupNavigation.Instance.PopAsync();
             return true;
-        }
-
-        private void ListView_ItemTapped_1(object sender, ItemTappedEventArgs e)
-        {
-
-        }
+        }               
     }
 }

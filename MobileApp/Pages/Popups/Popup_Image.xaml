@@ -19,6 +19,4 @@
                    x:Name="photo"                         
                    Aspect="AspectFit" InputTransparent="True"/>
         </Grid>
-
-
 </pages:PopupPage>

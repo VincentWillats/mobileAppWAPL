@@ -1,12 +1,6 @@
 ﻿using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MobileApp.Pages.Popups
@@ -23,7 +17,6 @@ namespace MobileApp.Pages.Popups
 
             InitializeComponent();
         }
-
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             PopupNavigation.Instance.PopAsync();

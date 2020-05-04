@@ -7,6 +7,7 @@ namespace MobileApp
     public class Data_ResultDetailPlayer
     {
         public Data_Player player = new Data_Player();
+
         public int Position { get; set; }
 
         public string PlayerName { get { return player.FullName; } }

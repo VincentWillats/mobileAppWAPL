@@ -11,13 +11,13 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="36*"/>
             <RowDefinition Height="3*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="70*"/>
-            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Source="roundlogo.png" VerticalOptions="Center"/>
         <Grid Grid.Row="3" Grid.Column="1" Padding="0" BackgroundColor="Transparent">

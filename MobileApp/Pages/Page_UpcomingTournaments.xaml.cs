@@ -1,12 +1,8 @@
 ﻿using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,11 +12,7 @@ namespace MobileApp
     public partial class Page_UpcomingTournaments : ContentPage
     {
         Controller_SQL sqlControl = new Controller_SQL();
-        FontSizeController fontController = new FontSizeController();
-        public IList<Data_Tournament> UpcomingTournaments { get; private set; }
-
-        
-
+        public IList<Data_Tournament> UpcomingTournaments { get; private set; }     
         public Page_UpcomingTournaments()
         {
             InitializeComponent();
@@ -28,7 +20,6 @@ namespace MobileApp
             UpcomingTournaments = new List<Data_Tournament>();
             LoadUpcomingTournaments();            
         }
-
         private async void LoadUpcomingTournaments()
         {
             List<Data_Tournament> _tournies = await sqlControl.LoadUpcomingTournamentsAsync();
@@ -37,27 +28,25 @@ namespace MobileApp
                 UpcomingTournaments.Add(tourny);
             }
             activityIndicator.IsRunning = false;
-            BindingContext = this;
-       
+            BindingContext = this;       
+            if(UpcomingTournaments.Count == 0)
+            {
+                noTournamentLbl.IsVisible = true;
+            }
         }
-
-
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
+        private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {            
             ListView listView = (ListView)sender;
             if (listView.SelectedItem != null)
             {               
-                DisplayEventDetails(new Popup_UpcomingTournaments(listView.SelectedItem));
+                await DisplayEventDetails(new Popup_UpcomingTournaments(listView.SelectedItem));
                 listView.SelectedItem = null;
-
-            }
+            }            
         }
-
-        private async void DisplayEventDetails(PopupPage page)
-        {
-            await Navigation.PushPopupAsync(page);
+        private async Task DisplayEventDetails(PopupPage page)
+        {            
+            await Navigation.PushPopupAsync(page);            
         }
-
         private void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
         {
             Navigation.PopAsync();

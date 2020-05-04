@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2" android:versionName="1.7" package="WAPL.MobileApp" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
-	<application android:label="WAPL.MobileApp" android:icon="@drawable/roundlogo">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2" android:versionName="2" package="WAPL.WAPL" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+	<application android:label="WAPL" android:icon="@mipmap/ic_launcher">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyC6olOmtQSMVoc_dm5-s-76l9je5A7TIn0" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
