@@ -7,7 +7,7 @@
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     CloseWhenBackgroundIsClicked="False" 
     x:Class="MobileApp.Pages.Popups.Popup_UpcomingTournaments">
-    <!--You can set an animation in the xaml file or in the csharp code behind-->
+    
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation 
             PositionIn="Center"
@@ -20,9 +20,18 @@
             EasingOut="SinIn"
             HasBackgroundAnimation="True"/>
     </pages:PopupPage.Animation>
-    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
-    <Frame HorizontalOptions="CenterAndExpand" CornerRadius="5" VerticalOptions="Center" BorderColor="Gold" BackgroundColor="Black" Padding="6" >
-        <Grid>
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
+            <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+        </StackLayout.GestureRecognizers>
+        <Frame HorizontalOptions="Center" CornerRadius="5" VerticalOptions="CenterAndExpand" BorderColor="Gold" BackgroundColor="Black" Padding="6" >
+            <Frame.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
+                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+            </Frame.GestureRecognizers>
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -31,33 +40,33 @@
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0"
-                        TextColor="Gold"
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                        TextColor="Gold" FontSize="14"
                         Text="{Binding upcomingTournament.StartDate, StringFormat='{0:D}'}"
                         HorizontalOptions="Start"/>
                 <Label Grid.Row="0" Grid.Column="1"
-                       TextColor="Gold"
+                       TextColor="Gold" FontSize="14"
                         Text="{Binding upcomingTournament.Buyin, StringFormat='{0:C}'}"                       
                         HorizontalOptions="End"/>
                 <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                        TextColor="Gold"
-                       FontSize="Medium"
+                       FontSize="17"
                        FontAttributes="Bold"
                        Text="{Binding upcomingTournament.VenueName}"
                        HorizontalTextAlignment="Center"
                        HorizontalOptions="Center"/>
-            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                        TextColor="Gold"
                        Text="{Binding upcomingTournament.ResultListDescription}"
-                       FontSize="Micro"
+                       FontSize="10"
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"/>
 
-            <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Gold"/>
+                <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Gold"/>
                 <Grid Grid.Row="4" Grid.Column="0" VerticalOptions="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -67,32 +76,37 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" 
                            Text="Address:"
                            TextColor="Gold"
-                           FontSize="Medium"
-                           FontAttributes="Bold"/>                   
+                           FontSize="17"
+                           FontAttributes="Bold"/>
                     <Label Grid.Row="1" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address01}"
-                           TextColor="Gold"/>
-   
+                           TextColor="Gold"
+                           FontSize="14"/>
+
                     <Label Grid.Row="2" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address02}"
-                           TextColor="Gold"/>
+                           TextColor="Gold"
+                           FontSize="14"/>
 
                     <Label Grid.Row="3" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address03}"
-                           TextColor="Gold"/>  
+                           TextColor="Gold"
+                           FontSize="14"/>
                     <Label Grid.Row="4" Grid.Column="0"
                            Text="{Binding upcomingTournament.Address04}"
-                           TextColor="Gold"/>    
+                           TextColor="Gold"
+                           FontSize="14"/>
                 </Grid>
                 <maps:Map Grid.Row="4" Grid.Column="1"  
                           MapType="Street"
-                          x:Name="map01">     
+                          x:Name="map01">
                 </maps:Map>
             </Grid>
         </Frame>
+    </StackLayout>
 </pages:PopupPage>

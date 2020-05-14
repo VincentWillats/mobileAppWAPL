@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,17 +25,14 @@ namespace MobileApp
     {
         Controller_SQL sqlController = new Controller_SQL();
         public ObservableCollection<Data_Player> Players { get; private set; }
-        bool searching = false;              
-
+        bool searching = false;    
         public Page_PlayerSearch()
         {
             InitializeComponent();            
             Players = new ObservableCollection<Data_Player>();
         }
-
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
+        {            
             Players.Clear();
             activityIndicator.IsRunning = true;
             if (searching) { return; }
@@ -55,7 +48,6 @@ namespace MobileApp
                 activityIndicator.IsRunning = false;
             }
         }
-
         private async void FillPlayerList(string searchStr)
         {
             searching = true;            
@@ -69,20 +61,16 @@ namespace MobileApp
             activityIndicator.IsRunning = false;
             searching = false;
         }
-
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             ListView listView = (ListView)sender;
-
-            DisplayPlayerProfile(listView.SelectedItem);
+            await DisplayPlayerProfile(listView.SelectedItem);
             listView.SelectedItem = null;
         }
-
-        private async void DisplayPlayerProfile(object playerObj)
+        private async Task DisplayPlayerProfile(object playerObj)
         {
             await Navigation.PushAsync(new Page_PlayerProfile(playerObj));
         }
-
         private void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
         {
             Navigation.PopAsync();

@@ -21,10 +21,7 @@ namespace MobileApp.Pages.Popups
 
             SetMap();
             InitializeComponent();
-            BindingContext = this;
-
-            
-            
+            BindingContext = this;     
         }
 
         private async void SetMap()
@@ -128,6 +125,16 @@ namespace MobileApp.Pages.Popups
             System.Diagnostics.Debug.WriteLine("BACK GROUND CLICKED");
             PopupNavigation.Instance.PopAsync();
             return true;
+        }
+               
+        private void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
+        {
+            PopupNavigation.Instance.PopAsync();
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PopAsync();
         }
     }
 }

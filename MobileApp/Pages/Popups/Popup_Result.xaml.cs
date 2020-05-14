@@ -11,6 +11,8 @@ using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MobileApp.Pages.Popups;
+using Rg.Plugins.Popup.Extensions;
 
 
 namespace MobileApp.Pages.Popups
@@ -19,6 +21,10 @@ namespace MobileApp.Pages.Popups
     public  partial class Popup_Result : PopupPage
     {
         Controller_SQL sqlController = new Controller_SQL();
+        bool loadingImage = false;
+        bool loadingProfile = false;
+        Data_ResultDetailPlayer selectedEntry = null;
+
         public Data_Result Result { get; private set; }
         public ObservableCollection<Data_ResultDetailPlayer> ResultPlayerList { get; private set; }
         public ObservableCollection<Data_Image> ImageList { get; private set; }
@@ -78,6 +84,61 @@ namespace MobileApp.Pages.Popups
             }
         }
 
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            ListView listView = (ListView)sender;
+            if (listView.SelectedItem != null)
+            {
+                OpenImage(new Popup_Image(listView.SelectedItem));
+                listView.SelectedItem = null;
+            }
+        }
+
+        private async void OpenImage(PopupPage page)
+        {
+            if (!loadingImage)
+            {
+                loadingImage = true;
+                await Navigation.PushPopupAsync(page);
+                loadingImage = false;
+            }            
+        }
+
+        private void player_Tapped(object sender, EventArgs e)
+        {
+            ListView listView = (ListView)sender;
+            Data_ResultDetailPlayer result = (Data_ResultDetailPlayer)listView.SelectedItem;
+            if (result == selectedEntry && !loadingProfile)
+            {
+                loadingProfile = true;
+                LoadPlayerProfile(result.player);
+                PopupNavigation.Instance.PopAsync();
+                loadingProfile = false;                
+            }
+            else
+            {
+                selectedEntry = result;
+            }
+        }
+
+        private async void LoadPlayerProfile(object player)
+        {
+            await Navigation.PushAsync(new Page_PlayerProfile(player));
+        }
+
+        private void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
+        {            
+            PopupNavigation.Instance.PopAsync();
+        }   
+   
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PopAsync();
+        }
+
+
+
         protected override void OnAppearing()
         {
                    
@@ -135,6 +196,6 @@ namespace MobileApp.Pages.Popups
             System.Diagnostics.Debug.WriteLine("BACK GROUND CLICKED");
             PopupNavigation.Instance.PopAsync();
             return true;
-        }
+        }               
     }
 }

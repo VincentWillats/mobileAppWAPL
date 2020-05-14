@@ -13,11 +13,12 @@
                 <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
             </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="28*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="11*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
@@ -27,19 +28,18 @@
 
             <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="1" Source="panallogo.png" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
 
-            <Label Grid.Row="2" Grid.Column="1"
+            <Label Grid.Row="4" Grid.Column="1"
                Text="Tap the Season number to pick another Season."
                VerticalOptions="End"
                HorizontalOptions="Center"
                TextColor="Gold"
-               FontSize="Micro"/>
+               FontSize="10"/>
 
             <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Black" BorderColor="Gold" Padding="5" CornerRadius="5">
                 <Grid>
                     <Grid.RowDefinitions> 
-                        <RowDefinition Height="20*"/>
-                        <RowDefinition Height="Auto"/>        
-                              
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>    
                         <RowDefinition Height="80*"/>        
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -50,33 +50,39 @@
                     <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                            Text="Name"
                            x:Name="NameLabel"
-                           FontSize="36"
+                           FontSize="28"
                            TextColor="Gold"
                            FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
 
                     <Label Grid.Row="1" Grid.Column="0" 
                            TextColor="Gold"
-                           FontSize="Large"                           
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
+                           FontSize="22"                           
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="End"
                            Text="Season:"
-                           Padding="0,0,0,9"/>
+                           Margin="0,0,0,5"/>
 
                     <Picker Grid.Row="1" Grid.Column="1"
                             ItemsSource="{Binding SeasonsPlayedIn}"
                             TextColor="Gold"                            
                             x:Name="SeasonPicker"
-                            
-                            HorizontalOptions="Start"  
-                            VerticalOptions="Center"
-                            TitleColor="Gold"
+                            FontSize="22"
+                            Margin="0,0,0,0"
+                            HorizontalOptions="FillAndExpand"  
+                            VerticalOptions="FillAndExpand"
+                            TitleColor="Gold"   
                             SelectedIndexChanged="SeasonPicker_SelectedIndexChanged"/>
                     
                     <ActivityIndicator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Color="Gold" x:Name="activityIndicator" IsRunning="False" VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="5" CornerRadius="5" BackgroundColor="Black" BorderColor="Gold">                       
-                        <ListView 
+                    <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="5" CornerRadius="5" BackgroundColor="Transparent" BorderColor="Gold">                       
+                        <ListView                             
+                            SelectionMode="None"
                             ItemsSource="{Binding StatsToShow}"
                             HasUnevenRows="True">
                             <!--ItemTapped="ListView_ItemTapped">-->
@@ -86,6 +92,7 @@
                                         <Grid Padding="5">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="1" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
@@ -95,15 +102,15 @@
                                             <Label Grid.Row="0" Grid.Column="0"
                                                     Text="{Binding StatName}"
                                                     FontAttributes="Bold"                                                
-                                                    TextColor="Gold"
+                                                    TextColor="Gold" FontSize="12"
                                                     HorizontalOptions="Start"/>
                                             <Label Grid.Row="0" Grid.Column="1"
                                                     Text="{Binding StatValue}"
-                                                   TextColor="Gold"
+                                                   TextColor="Gold" FontSize="10"
                                                    VerticalTextAlignment="Center"
                                                    HorizontalOptions="Start"
                                                    HorizontalTextAlignment="Start"/>
-
+                                            <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                         </Grid>
                                     </ViewCell>
                                 </DataTemplate>

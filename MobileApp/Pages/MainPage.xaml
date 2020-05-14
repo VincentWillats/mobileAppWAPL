@@ -6,42 +6,104 @@
              NavigationPage.HasNavigationBar="false"
              mc:Ignorable="d"
              x:Class="MobileApp.MainPage">
-    <Grid BackgroundColor="Black">
+    <Grid BackgroundColor="Black" SizeChanged="Grid_SizeChanged">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Source="roundlogo.png" VerticalOptions="Center"/>
-        <Grid Grid.Row="3" Grid.Column="1" Padding="0">
-            <Grid.RowDefinitions>
+        <Grid Grid.Row="3" Grid.Column="1" Padding="0" BackgroundColor="Transparent">
+              <Grid.RowDefinitions>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="20*"/>
             </Grid.RowDefinitions>
-            <Frame Grid.Row="0" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Upcoming Tournaments" TextColor="Gold" BackgroundColor="black" ClassId="upcomingTournaments" Pressed="Button_Pressed"/>
+            <Frame Grid.Row="0" Grid.Column="0" 
+                   BorderColor="Gold" BackgroundColor="black" 
+                   Padding="2" Margin="0" >
+                
+                <Label Text="Upcoming Tournaments" TextColor="Gold"  FontSize="19"
+                        BackgroundColor="Transparent"   Padding="0"  Margin="0"
+                        ClassId="upcomingTournaments" x:Name="UpcomingTournamentsLbl" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="Button_Pressed"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>                    
+            
+            <Frame Grid.Row="1" Grid.Column="0" 
+                   BorderColor="Gold" BackgroundColor="Transparent" 
+                   Padding="2" Margin="0,0,0,0">             
+                <Label Text="Leaderboards" TextColor="Gold"  FontSize="19"
+                        BackgroundColor="Transparent"   Padding="0"  Margin="0"
+                        ClassId="leaderboards" x:Name="LeaderboardsLbl" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="Button_Pressed"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </Frame>
-            <Frame Grid.Row="2" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Leaderboards" TextColor="Gold" BackgroundColor="black" ClassId="Leaderboards" Pressed="Button_Pressed"/>
+
+            <Frame Grid.Row="2" Grid.Column="0" 
+                   BorderColor="Gold" BackgroundColor="Transparent" 
+                   Padding="2" Margin="0">
+                <Label Text="Results" TextColor="Gold"  FontSize="19"
+                        BackgroundColor="Transparent"   Padding="0"  Margin="0"
+                        ClassId="results" x:Name="resultsLbl" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="Button_Pressed"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </Frame>
-            <Frame Grid.Row="3" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Results" TextColor="Gold" BackgroundColor="black" ClassId="results" Pressed="Button_Pressed"/>
+
+            <Frame Grid.Row="3" Grid.Column="0" 
+                       BorderColor="Gold" BackgroundColor="black" 
+                       Padding="2" Margin="0">
+
+                <Label Text="Player Search" TextColor="Gold"  FontSize="19"
+                            BackgroundColor="Transparent"   Padding="0"  Margin="0"
+                            ClassId="playerSearch" x:Name="PlayerSearchLbl" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"                      
+                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                                Tapped="Button_Pressed"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </Frame>
-            <Frame Grid.Row="4" Grid.Column="0" BorderColor="Gold" BackgroundColor="black" Padding="1">
-                <Button Text="Player Search" TextColor="Gold" BackgroundColor="black" ClassId="playerSearch" Pressed="Button_Pressed"/>
+            <Frame Grid.Row="4" Grid.Column="0" 
+                       BorderColor="Gold" BackgroundColor="black" 
+                       Padding="2" Margin="0">
+
+                <Label Text="Socials" TextColor="Gold"  FontSize="19"
+                            BackgroundColor="Transparent"   Padding="0"  Margin="0"
+                            ClassId="socials" x:Name="SocialsLbl" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"                      
+                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                                Tapped="Button_Pressed"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </Frame>
-                    
         </Grid>
     </Grid>
-
 </ContentPage>

@@ -47,11 +47,10 @@ namespace MobileApp
             return upcomingTournamentList;
         }
 
-
         public async Task<List<Data_Result>> LoadResultsAsync()
         {
             string funcName = "GetResultsGeneral";
-            List<Data_Result>       results =               new List<Data_Result>();
+            List<Data_Result>       results =              new List<Data_Result>();
 
             HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
             response.EnsureSuccessStatusCode();
@@ -74,8 +73,7 @@ namespace MobileApp
 
             return players;
         }
-
-
+        
         public async Task<List<Data_ResultDetailPlayer>> LoadResultDetailsAsyn(int tournyID)
         {
             string funcName = "GetResultDetailPlayers";
@@ -144,7 +142,6 @@ namespace MobileApp
             seasons = JsonConvert.DeserializeObject<List<int>>(responseBody);
             return seasons;
         }
-
 
         public async Task<List<Data_LeaderboardEntry>> LoadLeaderboardStats(int seasonID)
         {
