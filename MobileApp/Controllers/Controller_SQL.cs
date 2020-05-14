@@ -13,7 +13,7 @@ using System.Linq;
  * 
  * 
  * Todo:
- * Lots  
+ * Move to static functions.
  * 
  * 
  * Creator:         Vincent Willats
