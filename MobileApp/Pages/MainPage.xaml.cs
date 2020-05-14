@@ -7,7 +7,7 @@ using Xamarin.Forms;
 /* View Controller for MainPage
  * 
  * 
- * Todo:
+ * Todo: Move to MVVM
  *  
  * 
  * 
@@ -30,19 +30,19 @@ namespace MobileApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        FontSizeController fontSizeController = new FontSizeController();
-        List<Label> labelList = new List<Label>();
+        //FontSizeController fontSizeController = new FontSizeController();
+        //List<Label> labelList = new List<Label>();
         bool pageLoading = false;
 
         public MainPage()
         {
             InitializeComponent();
 
-            labelList.Add(UpcomingTournamentsLbl);
-            labelList.Add(LeaderboardsLbl);
-            labelList.Add(resultsLbl);
-            labelList.Add(PlayerSearchLbl);
-            labelList.Add(SocialsLbl);
+            //labelList.Add(UpcomingTournamentsLbl);
+            //labelList.Add(LeaderboardsLbl);
+            //labelList.Add(resultsLbl);
+            //labelList.Add(PlayerSearchLbl);
+            //labelList.Add(SocialsLbl);
         }
 
         private async void Button_Pressed(object sender, EventArgs e)
@@ -75,23 +75,6 @@ namespace MobileApp
                     break;
             }
             pageLoading = false;
-        }
-
-        private void SetFont()
-        {
-            int minFontSize = 10000;
-            foreach(Label label in labelList)
-            {
-                int fontSize = fontSizeController.GetMaxFontSize(label);
-                if (fontSize < minFontSize)
-                {
-                        minFontSize = fontSize;
-                }
-            }            
-            foreach(Label label in labelList)
-            {
-                label.FontSize = minFontSize / 2;
-            }
         }
 
         private void Grid_SizeChanged(object sender, EventArgs e)
