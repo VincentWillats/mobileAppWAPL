@@ -4,12 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              NavigationPage.HasNavigationBar="false"
-             mc:Ignorable="d"
-             x:Class="MobileApp.Page_Results">
+             mc:Ignorable="d"             
+             x:Class="MobileApp.Page_Results"
+             x:Name="MyPage">
     <Grid BackgroundColor="Black">
         <Grid.GestureRecognizers>
-            <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-            <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
         </Grid.GestureRecognizers>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -36,14 +37,15 @@
                FontSize="10"/>
         <ActivityIndicator Grid.Row="3" Grid.Column="1"
                            HorizontalOptions="Center" VerticalOptions="Center"
-                           Color="Gold" x:Name="activityIndicator" IsRunning="True" Margin="0"/>
+                           Color="Gold" x:Name="activityIndicator" IsRunning="{Binding TournamentsLoading}" Margin="0"/>
         <Frame Grid.Row="3" Grid.Column="1" BorderColor="Gold" BackgroundColor="Transparent" Padding="2" Margin="0" CornerRadius="5">
-            <ListView ItemsSource="{Binding Results}"
-                        HasUnevenRows="True"
-                        ItemSelected="ListView_ItemSelected">
+            <ListView   ItemsSource="{Binding Results}" 
+                        SelectedItem="{Binding ObjItemSelected, Mode=TwoWay}"
+                        x:Name="ListView1"                        
+                        HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell>                            
                             <Grid Padding="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />

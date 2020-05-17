@@ -49,18 +49,13 @@
                />
         <Frame Grid.Row="3" Grid.Column="1" CornerRadius="5" BorderColor="Gold" BackgroundColor="Transparent" Padding="2" Margin="0">      
             <ListView ItemsSource="{Binding UpcomingTournaments}"
+                        SelectedItem="{Binding ObjItemSelected, Mode=TwoWay}"
                         HasUnevenRows="True"                        
                         x:Name="ListView1">
-                <!--ItemTapped="ListView_ItemTapped">-->
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>                            
                             <Grid Padding="5">
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding PageClickCommand}" 
-                                        CommandParameter="{x:Reference ListView1}"/>           
-                                </Grid.GestureRecognizers>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -69,7 +64,6 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80*" />
-
                                 </Grid.ColumnDefinitions>
                                 
                                 <Label Grid.Row="0" Grid.Column="0" 

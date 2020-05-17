@@ -28,6 +28,26 @@ namespace MobileApp.ViewModels
         private bool pageLoading = false;
         private bool _tournamentsLoading;
         private bool _noUpcomingTournaments;
+        private Data_Tournament _objItemSelected;
+
+        public Data_Tournament ObjItemSelected
+        {
+            get { return _objItemSelected; }
+            set
+            {
+                if (_objItemSelected != value)
+                {
+                    _objItemSelected = value;
+                    if (_objItemSelected != null)
+                    {
+                        TournamentClicked(_objItemSelected);
+                        _objItemSelected = null;
+                        OnPropertyChanged();
+                    }
+                }
+            }
+        }
+
 
         public bool TournamentsLoading
         {
@@ -51,7 +71,6 @@ namespace MobileApp.ViewModels
 
 
         public Command SwipedBackCommand { get; }
-        public Command TournamentClickedCommand { get; }
 
         public ObservableCollection<Data_Tournament> UpcomingTournaments { get; private set; }
 
@@ -61,7 +80,6 @@ namespace MobileApp.ViewModels
         {            
             _navigation = navigation;
             SwipedBackCommand = new Command(SwipedBack);
-            TournamentClickedCommand = new Command<ListView>(async (x) => await TournamentClicked(x));
             UpcomingTournaments = new ObservableCollection<Data_Tournament>();
             LoadUpcomingTournaments();
         }
@@ -82,18 +100,12 @@ namespace MobileApp.ViewModels
         }
 
 
-        private async Task TournamentClicked(ListView listview)
+        private async Task TournamentClicked(Data_Tournament tourny)
         {
             if(pageLoading) { return; }
-            if (listview.SelectedItem != null)
-            {
-                pageLoading = true;
-                Data_Tournament tourny = (Data_Tournament)listview.SelectedItem;
-                System.Diagnostics.Debug.WriteLine(tourny.TournamentID.ToString());
-                await _navigation.PushPopupAsync(new Popup_UpcomingTournaments(listview.SelectedItem));
-                listview.SelectedItem = null;
-                pageLoading = false;
-            }        
+            pageLoading = true;
+            await _navigation.PushPopupAsync(new Popup_UpcomingTournaments(tourny));
+            pageLoading = false;                 
         }
 
 
