@@ -9,8 +9,8 @@
              x:Class="MobileApp.Page_Socials">
     <Grid BackgroundColor="Black">
         <Grid.GestureRecognizers>
-            <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-            <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
         </Grid.GestureRecognizers>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -39,24 +39,28 @@
                     <RowDefinition Height="30*"/>
                     <RowDefinition Height="15*"/>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Grid.Column="0" ClassId="facebook" Source="facebooklogo.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Image Grid.Row="0" Grid.Column="0" ClassId="facebook" x:Name="Img_fb"  Source="facebooklogo.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        <TapGestureRecognizer Command="{Binding SocialClickedCommand}"
+                                              CommandParameter="{x:Reference Img_fb}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Grid.Row="1" Grid.Column="0" ClassId="youtube" Source="youtubelogo.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Image Grid.Row="1" Grid.Column="0" ClassId="youtube" x:Name="Img_youtube" Source="youtubelogo.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        <TapGestureRecognizer Command="{Binding SocialClickedCommand}"
+                                                CommandParameter="{x:Reference Img_youtube}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Grid.Row="2" Grid.Column="0" ClassId="twitch" Source="twitchlogosmall.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Image Grid.Row="2" Grid.Column="0" ClassId="twitch" x:Name="Img_twitch" Source="twitchlogosmall.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        <TapGestureRecognizer Command="{Binding SocialClickedCommand}"
+                                              CommandParameter="{x:Reference Img_twitch}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Grid.Row="3" Grid.Column="0" ClassId="website" Source="website.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Image Grid.Row="3" Grid.Column="0" ClassId="website" x:Name="Img_website" Source="website.png" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        <TapGestureRecognizer Command="{Binding SocialClickedCommand}"
+                                              CommandParameter="{x:Reference Img_website}"/>
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
