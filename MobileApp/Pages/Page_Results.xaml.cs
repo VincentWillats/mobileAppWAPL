@@ -21,7 +21,7 @@ namespace MobileApp
         }
         private async void LoadResults()
         {
-            List<Data_Result> _results = await sqlController.LoadResultsAsync();
+            List<Data_Result> _results = await Controller_SQL.LoadResultsAsync();
             foreach(Data_Result result in _results)
             {
                 Results.Add(result);

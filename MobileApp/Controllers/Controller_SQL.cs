@@ -31,10 +31,10 @@ namespace MobileApp
 {
     public class Controller_SQL
     {
-        string webAppURL = "https://waplmobile.azurewebsites.net/api/";
-        HttpClient client = new HttpClient();
+        static string webAppURL = "https://waplmobile.azurewebsites.net/api/";
+        static HttpClient client = new HttpClient();
 
-        public async Task<List<Data_Tournament>> LoadUpcomingTournamentsAsync()
+        public static async Task<List<Data_Tournament>> LoadUpcomingTournamentsAsync()
         {
             string funcName = "GetUpcomingTournaments";
             List<Data_Tournament> upcomingTournamentList = new List<Data_Tournament>();
@@ -47,7 +47,7 @@ namespace MobileApp
             return upcomingTournamentList;
         }
 
-        public async Task<List<Data_Result>> LoadResultsAsync()
+        public static async Task<List<Data_Result>> LoadResultsAsync()
         {
             string funcName = "GetResultsGeneral";
             List<Data_Result>       results =              new List<Data_Result>();
@@ -59,7 +59,7 @@ namespace MobileApp
             return results;
         }
 
-        public async Task<List<Data_Player>> LoadPlayerSearchedListAsync(string searchStr)
+        public static async Task<List<Data_Player>> LoadPlayerSearchedListAsync(string searchStr)
         {
             string funcName = "GetPlayerSearchList";
             List<Data_Player> players = new List<Data_Player>();
@@ -74,7 +74,7 @@ namespace MobileApp
             return players;
         }
         
-        public async Task<List<Data_ResultDetailPlayer>> LoadResultDetailsAsyn(int tournyID)
+        public static async Task<List<Data_ResultDetailPlayer>> LoadResultDetailsAsyn(int tournyID)
         {
             string funcName = "GetResultDetailPlayers";
             List<Data_ResultDetailPlayer> players = new List<Data_ResultDetailPlayer>();
@@ -89,7 +89,7 @@ namespace MobileApp
             return players;
         }
 
-        public async Task<List<Data_Image>> LoadResultImages(int tournyID)
+        public static async Task<List<Data_Image>> LoadResultImages(int tournyID)
         {
             string funcName = "GetResultImages";
             List<Data_Image> images = new List<Data_Image>();
@@ -104,7 +104,7 @@ namespace MobileApp
             return images;
         }
 
-        public async Task<Data_PlayerStats> LoadPlayerStats(int playerID, int seasonID)
+        public static async Task<Data_PlayerStats> LoadPlayerStats(int playerID, int seasonID)
         {
             Data_PlayerStats playerStats = new Data_PlayerStats();
             string funcName = "GetPlayerStats";
@@ -117,7 +117,7 @@ namespace MobileApp
             return playerStats;
         }
 
-        public async Task<List<int>> LoadPlayerPlayedSeasons(int playerID)
+        public static async Task<List<int>> LoadPlayerPlayedSeasons(int playerID)
         {
             List<int> seasonsPlayedIn = new List<int>();
             string funcName = "GetPlayerSeasonList";
@@ -131,7 +131,7 @@ namespace MobileApp
             return seasonsPlayedIn;
         }
 
-        public async Task<List<int>> LoadSeasonList()
+        public static async Task<List<int>> LoadSeasonList()
         {
             List<int> seasons = new List<int>();
             string funcName = "GetSeasonList";
@@ -143,7 +143,7 @@ namespace MobileApp
             return seasons;
         }
 
-        public async Task<List<Data_LeaderboardEntry>> LoadLeaderboardStats(int seasonID)
+        public static async Task<List<Data_LeaderboardEntry>> LoadLeaderboardStats(int seasonID)
         {
             string funcName = "GetLeaderboardEntries";
             List<Data_LeaderboardEntry> leaderboardEntries = new List<Data_LeaderboardEntry>();

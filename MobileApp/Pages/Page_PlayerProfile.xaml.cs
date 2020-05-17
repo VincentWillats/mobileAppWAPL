@@ -46,7 +46,7 @@ namespace MobileApp
         {
             activityIndicator.IsRunning = true;
             Data_PlayerStats _playerStats = new Data_PlayerStats();
-            _playerStats = await sqlController.LoadPlayerStats(playerID, seasonID);
+            _playerStats = await Controller_SQL.LoadPlayerStats(playerID, seasonID);
             PlayerStats = _playerStats;
             PlayerStats.Player.FullName = player.FullName;
             AddStatsToShow();  
@@ -55,7 +55,7 @@ namespace MobileApp
         private async void LoadPlayerSeasonsPlayedList(int playerID)
         {
             List<int> _seasonsPlayedIn = new List<int>();
-            _seasonsPlayedIn = await sqlController.LoadPlayerPlayedSeasons(playerID);
+            _seasonsPlayedIn = await Controller_SQL.LoadPlayerPlayedSeasons(playerID);
             foreach(int season in _seasonsPlayedIn)
             {
                 SeasonsPlayedIn.Add(season);

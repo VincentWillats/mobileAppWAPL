@@ -8,8 +8,8 @@
              x:Class="MobileApp.Page_UpcomingTournaments">
     <Grid BackgroundColor="Black">
         <Grid.GestureRecognizers>
-            <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-            <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
 
         </Grid.GestureRecognizers>
         <Grid.RowDefinitions>
@@ -35,7 +35,9 @@
                FontSize="10"/>
         <ActivityIndicator Grid.Row="3" Grid.Column="1"
                            HorizontalOptions="Center" VerticalOptions="Center"
-                           Color="Gold" x:Name="activityIndicator"/>
+                           Color="Gold" x:Name="activityIndicator"
+                           IsVisible="{Binding TournamentsLoading}"
+                           IsRunning="{Binding TournamentsLoading}"/>
         <Label Grid.Row="3" Grid.Column="1"
                x:Name="noTournamentLbl"
                Text="Sorry, no current upcoming tournaments."
@@ -43,17 +45,22 @@
                HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                TextColor="Gold" 
                FontSize="18"
-               IsVisible="False"
+               IsVisible="{Binding NoUpcomingTournaments}"
                />
         <Frame Grid.Row="3" Grid.Column="1" CornerRadius="5" BorderColor="Gold" BackgroundColor="Transparent" Padding="2" Margin="0">      
             <ListView ItemsSource="{Binding UpcomingTournaments}"
-                        HasUnevenRows="True"
-                        ItemSelected="ListView_ItemSelected">
+                        HasUnevenRows="True"                        
+                        x:Name="ListView1">
                 <!--ItemTapped="ListView_ItemTapped">-->
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell>                            
                             <Grid Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding PageClickCommand}" 
+                                        CommandParameter="{x:Reference ListView1}"/>           
+                                </Grid.GestureRecognizers>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -64,6 +71,7 @@
                                     <ColumnDefinition Width="80*" />
 
                                 </Grid.ColumnDefinitions>
+                                
                                 <Label Grid.Row="0" Grid.Column="0" 
                                         Text="{Binding StartDate, StringFormat='{0:ddd d, MMMM}'}"    x:Name="lblDate"
                                         TextColor="Gold"   FontSize="14" 

@@ -30,7 +30,7 @@ namespace MobileApp
             LeaderboardEntries.Clear();
             int posCount = 1;
             List<Data_LeaderboardEntry> _leaderboardEntries = new List<Data_LeaderboardEntry>();
-            _leaderboardEntries = await sqlController.LoadLeaderboardStats(seasonID);
+            _leaderboardEntries = await Controller_SQL.LoadLeaderboardStats(seasonID);
             foreach(Data_LeaderboardEntry entry in _leaderboardEntries)
             {
                 entry.Position = posCount;
@@ -43,7 +43,7 @@ namespace MobileApp
         {
             //activityIndicator.IsRunning = true;
             List<int> _seasonsPlayedIn = new List<int>();
-            _seasonsPlayedIn = await sqlController.LoadSeasonList();
+            _seasonsPlayedIn = await Controller_SQL.LoadSeasonList();
             foreach (int season in _seasonsPlayedIn)
             {
                 Seasons.Add(season);

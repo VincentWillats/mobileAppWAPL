@@ -47,7 +47,7 @@ namespace MobileApp.Pages.Popups
 
         private async Task LoadResultDetailsAsyn()
         {
-            List<Data_ResultDetailPlayer> _results = await sqlController.LoadResultDetailsAsyn(Result.tourny.TournamentID);
+            List<Data_ResultDetailPlayer> _results = await Controller_SQL.LoadResultDetailsAsyn(Result.tourny.TournamentID);
             foreach(Data_ResultDetailPlayer player in _results)
             {
                 ResultPlayerList.Add(player);
@@ -61,7 +61,7 @@ namespace MobileApp.Pages.Popups
                 System.Diagnostics.Debug.WriteLine("WebsiteDown");
                 return;
             }
-            List<Data_Image> _images = await sqlController.LoadResultImages(Result.tourny.TournamentID);
+            List<Data_Image> _images = await Controller_SQL.LoadResultImages(Result.tourny.TournamentID);
             foreach (Data_Image image in _images)
             {
                 ImageList.Add(image);

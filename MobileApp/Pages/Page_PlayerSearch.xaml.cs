@@ -51,7 +51,7 @@ namespace MobileApp
         private async void FillPlayerList(string searchStr)
         {
             searching = true;            
-            List<Data_Player> _players = await sqlController.LoadPlayerSearchedListAsync(searchStr);
+            List<Data_Player> _players = await Controller_SQL.LoadPlayerSearchedListAsync(searchStr);
             foreach (Data_Player player in _players)
             {                
                 Players.Add(player);
