@@ -13,7 +13,7 @@
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1"/>
             </Grid.GestureRecognizers>
             <Image Source="{Binding Image.FullImagePath, Converter={StaticResource Converter}}"
                    x:Name="photo"                         

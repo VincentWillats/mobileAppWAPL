@@ -25,7 +25,6 @@ namespace MobileApp.ViewModels
         private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private bool pageLoading = false;
         private bool _leaderboardLoading;
         private Data_LeaderboardEntry _objItemSelected;
 

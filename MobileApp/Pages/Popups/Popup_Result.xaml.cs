@@ -89,7 +89,7 @@ namespace MobileApp.Pages.Popups
             ListView listView = (ListView)sender;
             if (listView.SelectedItem != null)
             {
-                OpenImage(new Popup_Image(listView.SelectedItem));
+                OpenImage(new Popup_Image((Data_Image)listView.SelectedItem));
                 listView.SelectedItem = null;
             }
         }
