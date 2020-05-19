@@ -358,8 +358,4 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/visualstudio,xamarinstudio
-MobileApp.Android/Properties/AndroidManifest.xml
-MobileApp.Android/Properties/AndroidManifest.xml
-MobileApp.Android/Properties/AndroidManifest.xml~dfffe2dd36f3d256ea8c218092ec4ac84006b1b3
-MobileApp.Android/Properties/AndroidManifest.xml
-MobileApp.Android/Properties/AndroidManifest.xml
+MobileApp/Keys/Keys.cs
