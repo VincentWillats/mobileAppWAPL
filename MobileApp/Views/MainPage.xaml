@@ -6,7 +6,7 @@
              NavigationPage.HasNavigationBar="false"
              mc:Ignorable="d"
              x:Class="MobileApp.MainPage">
-    <Grid BackgroundColor="Black" SizeChanged="Grid_SizeChanged">
+    <Grid BackgroundColor="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="36*"/>
@@ -39,7 +39,8 @@
                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
-                            Tapped="Button_Pressed"/>
+                            Command="{Binding PageClickCommand}" 
+                            CommandParameter="{x:Reference UpcomingTournamentsLbl}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Frame>                    
@@ -54,7 +55,8 @@
                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
-                            Tapped="Button_Pressed"/>
+                            Command="{Binding PageClickCommand}" 
+                            CommandParameter="{x:Reference LeaderboardsLbl}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Frame>
@@ -69,7 +71,8 @@
                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
-                            Tapped="Button_Pressed"/>
+                            Command="{Binding PageClickCommand}" 
+                            CommandParameter="{x:Reference resultsLbl}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Frame>
@@ -84,8 +87,9 @@
                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center"                      
                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer
-                                Tapped="Button_Pressed"/>
+                        <TapGestureRecognizer 
+                            Command="{Binding PageClickCommand}" 
+                            CommandParameter="{x:Reference PlayerSearchLbl}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Frame>
@@ -100,7 +104,8 @@
                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
-                                Tapped="Button_Pressed"/>
+                                 Command="{Binding PageClickCommand}" 
+                            CommandParameter="{x:Reference SocialsLbl}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Frame>

@@ -29,28 +29,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\Page_Leaderboards.xaml">
+    <EmbeddedResource Update="Views\Page_Leaderboards.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Page_PlayerProfile.xaml">
+    <EmbeddedResource Update="Views\Page_PlayerProfile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Page_PlayerSearch.xaml">
+    <EmbeddedResource Update="Views\Page_PlayerSearch.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Page_Socials.xaml">
+    <EmbeddedResource Update="Views\Page_Socials.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Page_UpcomingTournaments.xaml">
+    <EmbeddedResource Update="Views\Page_UpcomingTournaments.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Popups\Popup_Image.xaml">
+    <EmbeddedResource Update="Views\Popups\Popup_Image.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Popups\Popup_Result.xaml">
+    <EmbeddedResource Update="Views\Popups\Popup_Result.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Popups\Popup_UpcomingTournaments.xaml">
+    <EmbeddedResource Update="Views\Popups\Popup_UpcomingTournaments.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">

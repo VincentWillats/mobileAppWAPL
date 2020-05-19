@@ -1,76 +1,131 @@
-﻿using System;
+﻿using MobileApp.Pages.Popups;
+using Rg.Plugins.Popup.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace MobileApp
+/* ViewModel for Page_PlayerProfile
+ * 
+ * Creator:         Vincent Willats
+ * Date Created:    19/05/2020
+ * Contact Email:   Vincentwillats.software@gmail.com
+ * 
+ * Changelog:
+ * 19/05/2020 -- Moved to MVVM
+ */
+
+namespace MobileApp.ViewModels
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Page_PlayerProfile : ContentPage
+    class Page_PlayerProfileViewModel : INotifyPropertyChanged
     {
-        Data_Player player = new Data_Player();
-        int seasonID = -1;
+        private INavigation _navigation;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private int _seasonPicked = -1;
+        private bool _statsLoading;
+        private Data_Player _player;
+        private string _playerName;
+
         public Data_PlayerStats PlayerStats { get; private set; }
         public ObservableCollection<Data_Stat> StatsToShow { get; private set; }
-        public ObservableCollection<int> SeasonsPlayedIn { get; private set; }
 
-        Controller_SQL sqlController = new Controller_SQL();
+        private List<int> _seasonsIn;
 
-        public Page_PlayerProfile(object playerObj)
+        public List<int> SeasonsIn
         {
-            player = (Data_Player)playerObj;
+            get { return _seasonsIn; }
+            set
+            {
+                _seasonsIn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string PlayerName
+        {
+            get { return _playerName; }
+            set
+            {
+                _playerName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool StatsLoading
+        {
+            get { return _statsLoading; }
+            set
+            {
+                _statsLoading = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int SeasonPicked
+        {
+            get { return _seasonPicked; }
+            set
+            {                
+                if(value >= 1)
+                {
+                    _seasonPicked = value;
+                    OnPropertyChanged();
+                    LoadPlayerStats(_player.PlayerID, _seasonPicked);
+                }
+
+            }
+        }
+
+        public Command SwipedBackCommand { get; }
+
+
+        public Page_PlayerProfileViewModel(INavigation navigation, object playerObj)
+        {
+            _navigation = navigation;
+
+            _player = (Data_Player)playerObj;
             StatsToShow = new ObservableCollection<Data_Stat>();
-            SeasonsPlayedIn = new ObservableCollection<int>();
             
-            LoadPlayerSeasonsPlayedList(player.PlayerID); 
-            BindingContext = this;
 
-            InitializeComponent();
-            NameLabel.Text = player.FullName;
+            LoadPlayerSeasonsPlayedList(_player.PlayerID);
+            PlayerName = _player.FullName;
+
+            SwipedBackCommand = new Command(SwipedBack);
         }
-        public Page_PlayerProfile(object playerObj, int _seasonID)
+
+        public Page_PlayerProfileViewModel(INavigation navigation, object playerObj, int seasonID)
         {
-            player = (Data_Player)playerObj;
-            seasonID = _seasonID;
+            _navigation = navigation;
+            _player = (Data_Player)playerObj;            
             StatsToShow = new ObservableCollection<Data_Stat>();
-            SeasonsPlayedIn = new ObservableCollection<int>();
+            _seasonPicked = seasonID;
 
-            LoadPlayerSeasonsPlayedList(player.PlayerID);
-            BindingContext = this;
-
-            InitializeComponent();
-            NameLabel.Text = player.FullName;
+            LoadPlayerSeasonsPlayedList(_player.PlayerID);
+            PlayerName = _player.FullName;
+            
         }
+
+        private async void LoadPlayerSeasonsPlayedList(int playerID)
+        {           
+            SeasonsIn = await Controller_SQL.LoadPlayerPlayedSeasons(playerID);   
+            if(SeasonsIn.Count <= 0) { return; }
+            SeasonPicked = (_seasonPicked != -1) ? SeasonsIn[SeasonsIn.IndexOf(_seasonPicked)] : SeasonsIn[0];    
+        }
+
         private async void LoadPlayerStats(int playerID, int seasonID)
         {
-            activityIndicator.IsRunning = true;
-            Data_PlayerStats _playerStats = new Data_PlayerStats();
-            _playerStats = await sqlController.LoadPlayerStats(playerID, seasonID);
+            StatsLoading = true;
+            Data_PlayerStats _playerStats = await Controller_SQL.LoadPlayerStats(playerID, seasonID);        
             PlayerStats = _playerStats;
-            PlayerStats.Player.FullName = player.FullName;
-            AddStatsToShow();  
-            activityIndicator.IsRunning = false;
+            PlayerStats.Player = _player;
+            AddStatsToShow();
+            StatsLoading = false;
         }
-        private async void LoadPlayerSeasonsPlayedList(int playerID)
-        {
-            List<int> _seasonsPlayedIn = new List<int>();
-            _seasonsPlayedIn = await sqlController.LoadPlayerPlayedSeasons(playerID);
-            foreach(int season in _seasonsPlayedIn)
-            {
-                SeasonsPlayedIn.Add(season);
-            }          
-            if(seasonID == -1)
-            {
-                SeasonPicker.SelectedIndex = 0;
-            }
-            else
-            {
-                SeasonPicker.SelectedItem = seasonID;
-            }
-            
 
-        }
         private void AddStatsToShow()
         {
             StatsToShow.Clear();
@@ -79,7 +134,7 @@ namespace MobileApp
             StatsToShow.Add(new Data_Stat("Total Games Rank", PlayerStats.Total_Games_RankNo.ToString()));
             StatsToShow.Add(new Data_Stat("Total Games in top", PlayerStats.Total_Games_In_TopPCT_Str + " of Players"));
             StatsToShow.Add(new Data_Stat("Total Wins", PlayerStats.Wins_Amount.ToString()));
-            if(PlayerStats.Wins_Amount_In_TopPCT < in_this_PCT_to_Show)
+            if (PlayerStats.Wins_Amount_In_TopPCT < in_this_PCT_to_Show)
             {
                 StatsToShow.Add(new Data_Stat("Total Wins Rank", PlayerStats.Wins_Amount_RankNo.ToString()));
                 StatsToShow.Add(new Data_Stat("Total Wins in top", PlayerStats.Wins_Amount_In_TopPCT_Str + " of Players"));
@@ -113,31 +168,21 @@ namespace MobileApp
             {
                 StatsToShow.Add(new Data_Stat("Total Final Tables Rank", PlayerStats.FinalTable_Win_PCT_RankNo.ToString()));
                 StatsToShow.Add(new Data_Stat("Total Final Tables in top", PlayerStats.FinalTable_Win_PCT_In_TopPCT_Str + " of Players"));
-            }            
+            }
             //if (PlayerStats.Avg_Pct_Field_Beaten < ?????
             //{
-                StatsToShow.Add(new Data_Stat("Average Percent of field Beaten", PlayerStats.Avg_Pct_Field_Beaten_Str));  
+            StatsToShow.Add(new Data_Stat("Average Percent of field Beaten", PlayerStats.Avg_Pct_Field_Beaten_Str));
             //}
         }
-        private void SeasonPicker_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void SwipedBack()
         {
-            Picker picker = (Picker)sender;
-            int seasonID;
-            Data_PlayerStats _playerStats = new Data_PlayerStats();
-            PlayerStats = _playerStats;
-            activityIndicator.IsRunning = true;
-            if (!int.TryParse(picker.SelectedItem.ToString(), out seasonID))
-            {
-                return;
-            }
-            else
-            {     
-                LoadPlayerStats(player.PlayerID, seasonID);
-            }            
+            _navigation.PopAsync();
         }
-        private void SwipeGestureRecognizer_Swiped(object sender, SwipedEventArgs e)
+
+        private void OnPropertyChanged([CallerMemberName] string name = "")
         {
-            Navigation.PopAsync();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

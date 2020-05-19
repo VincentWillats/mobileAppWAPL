@@ -22,14 +22,14 @@
     </pages:PopupPage.Animation>
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <StackLayout.GestureRecognizers>
-            <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-            <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
-            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
+            <TapGestureRecognizer Command="{Binding SwipedBackCommand}"/>
         </StackLayout.GestureRecognizers>
         <Frame HorizontalOptions="Center" CornerRadius="5" VerticalOptions="CenterAndExpand" BorderColor="Gold" BackgroundColor="Black" Padding="6" >
             <Frame.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
             </Frame.GestureRecognizers>
             <Grid>
                 <Grid.RowDefinitions>
@@ -46,22 +46,22 @@
 
                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                         TextColor="Gold" FontSize="14"
-                        Text="{Binding upcomingTournament.StartDate, StringFormat='{0:D}'}"
+                        Text="{Binding UpcomingTournament.StartDate, StringFormat='{0:D}'}"
                         HorizontalOptions="Start"/>
                 <Label Grid.Row="0" Grid.Column="1"
                        TextColor="Gold" FontSize="14"
-                        Text="{Binding upcomingTournament.Buyin, StringFormat='{0:C}'}"                       
+                        Text="{Binding UpcomingTournament.Buyin, StringFormat='{0:C}'}"                       
                         HorizontalOptions="End"/>
                 <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                        TextColor="Gold"
                        FontSize="17"
                        FontAttributes="Bold"
-                       Text="{Binding upcomingTournament.VenueName}"
+                       Text="{Binding UpcomingTournament.VenueName}"
                        HorizontalTextAlignment="Center"
                        HorizontalOptions="Center"/>
                 <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                        TextColor="Gold"
-                       Text="{Binding upcomingTournament.ResultListDescription}"
+                       Text="{Binding UpcomingTournament.ResultListDescription}"
                        FontSize="10"
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"/>
@@ -84,28 +84,26 @@
                            FontSize="17"
                            FontAttributes="Bold"/>
                     <Label Grid.Row="1" Grid.Column="0"
-                           Text="{Binding upcomingTournament.Address01}"
+                           Text="{Binding UpcomingTournament.Address01}"
                            TextColor="Gold"
                            FontSize="14"/>
 
                     <Label Grid.Row="2" Grid.Column="0"
-                           Text="{Binding upcomingTournament.Address02}"
+                           Text="{Binding UpcomingTournament.Address02}"
                            TextColor="Gold"
                            FontSize="14"/>
 
                     <Label Grid.Row="3" Grid.Column="0"
-                           Text="{Binding upcomingTournament.Address03}"
+                           Text="{Binding UpcomingTournament.Address03}"
                            TextColor="Gold"
                            FontSize="14"/>
                     <Label Grid.Row="4" Grid.Column="0"
-                           Text="{Binding upcomingTournament.Address04}"
+                           Text="{Binding UpcomingTournament.Address04}"
                            TextColor="Gold"
                            FontSize="14"/>
                 </Grid>
-                <maps:Map Grid.Row="4" Grid.Column="1"  
-                          MapType="Street"
-                          x:Name="map01">
-                </maps:Map>
+                <ContentView Content="{Binding Map01}
+                        " Grid.Row="4" Grid.Column="1"/>
             </Grid>
         </Frame>
     </StackLayout>
