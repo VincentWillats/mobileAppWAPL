@@ -22,14 +22,14 @@
     </pages:PopupPage.Animation>
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <StackLayout.GestureRecognizers>
-            <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-            <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
-            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
+            <TapGestureRecognizer Command="{Binding SwipedBackCommand}"/>
         </StackLayout.GestureRecognizers>
         <Frame HorizontalOptions="Center" CornerRadius="5" VerticalOptions="CenterAndExpand" BorderColor="Gold" BackgroundColor="Black" Padding="6" >
             <Frame.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
             </Frame.GestureRecognizers>
             <Grid>
                 <Grid.RowDefinitions>
@@ -102,10 +102,8 @@
                            TextColor="Gold"
                            FontSize="14"/>
                 </Grid>
-                <maps:Map Grid.Row="4" Grid.Column="1"  
-                          MapType="Street"
-                          x:Name="map01">
-                </maps:Map>
+                <ContentView Content="{Binding Map01}
+                        " Grid.Row="4" Grid.Column="1"/>
             </Grid>
         </Frame>
     </StackLayout>

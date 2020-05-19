@@ -19,8 +19,7 @@ namespace MobileApp.Pages.Popups
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public  partial class Popup_Result : PopupPage
-    {
-        
+    {        
         public Popup_Result(object selectedItem)
         {
             BindingContext = new Popup_ResultViewModel(this.Navigation, selectedItem);

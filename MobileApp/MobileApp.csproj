@@ -50,12 +50,16 @@
     <EmbeddedResource Update="Views\Popups\Popup_Result.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Popups\Popup_UpcomingTournaments.xaml">
+    <EmbeddedResource Update="Views\Popups\Popup_UpcomingTournaments.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Popups\" />
   </ItemGroup>
 </Project>

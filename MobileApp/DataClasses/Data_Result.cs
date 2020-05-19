@@ -41,13 +41,10 @@ namespace MobileApp
             get { return tourny.StartDate; }
         }
 
-        private DateTime _regoDatee;
-        public DateTime RegoDate
-        {
-            get { return tourny.RegoDate; }
-        }
-
-
-
+        //private DateTime _regoDatee;
+        //public DateTime RegoDate
+        //{
+        //    get { return tourny.RegoDate; }
+        //}
     }
 }

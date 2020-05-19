@@ -26,11 +26,9 @@ namespace MobileApp.ViewModels
     {
         private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
-
         private Data_Result _currentTournament;
         private bool _imageLoading;
         private bool _resultsLoading;
-
         private Data_Image _imgItemSelected;
         private Data_ResultDetailPlayer _resultSelected;
 
@@ -103,6 +101,7 @@ namespace MobileApp.ViewModels
         public Command SwipedBackCommand { get; }
         
         public ObservableCollection<Data_ResultDetailPlayer> ResultPlayerList { get; private set; }
+
         public ObservableCollection<Data_Image> ImageList { get; private set; }
 
         public Popup_ResultViewModel(INavigation navigation, object selectedItem)
@@ -115,6 +114,7 @@ namespace MobileApp.ViewModels
             SwipedBackCommand = new Command(SwipedBack);
             LoadPage();
         }
+
         private async void LoadPage()
         {            
             await LoadResultDetailsAsyn();
