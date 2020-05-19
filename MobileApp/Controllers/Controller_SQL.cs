@@ -119,7 +119,7 @@ namespace MobileApp
 
         public static async Task<List<int>> LoadPlayerPlayedSeasons(int playerID)
         {
-            List<int> seasonsPlayedIn = new List<int>();
+            List<int> seasonsPlayedIn;
             string funcName = "GetPlayerSeasonList";
             var strPlayerID = new StringContent(playerID.ToString());
 
