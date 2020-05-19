@@ -35,7 +35,7 @@
     <EmbeddedResource Update="Pages\Page_PlayerProfile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Page_PlayerSearch.xaml">
+    <EmbeddedResource Update="Views\Page_PlayerSearch.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Page_Socials.xaml">

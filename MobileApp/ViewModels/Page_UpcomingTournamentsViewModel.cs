@@ -48,7 +48,6 @@ namespace MobileApp.ViewModels
             }
         }
 
-
         public bool TournamentsLoading
         {
             get { return _tournamentsLoading; }
@@ -69,12 +68,9 @@ namespace MobileApp.ViewModels
             }
         }
 
-
         public Command SwipedBackCommand { get; }
 
         public ObservableCollection<Data_Tournament> UpcomingTournaments { get; private set; }
-
-
 
         public Page_UpcomingTournamentsViewModel(INavigation navigation)
         {            
@@ -99,15 +95,18 @@ namespace MobileApp.ViewModels
             }
         }
 
-
-        private async Task TournamentClicked(Data_Tournament tourny)
+        private async void TournamentClicked(Data_Tournament tourny)
         {
             if(pageLoading) { return; }
-            pageLoading = true;
-            await _navigation.PushPopupAsync(new Popup_UpcomingTournaments(tourny));
-            pageLoading = false;                 
+            await OpenUpcomingTournament(tourny);
         }
 
+        private async Task OpenUpcomingTournament(Data_Tournament tourny)
+        {
+            pageLoading = true;
+            await _navigation.PushPopupAsync(new Popup_UpcomingTournaments(tourny));
+            pageLoading = false;
+        }
 
         private void SwipedBack()
         {
