@@ -29,7 +29,7 @@ namespace MobileApp.ViewModels
     {
         private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
-        private Xamarin.Forms.Maps.Map _map01;
+        private Xamarin.Forms.Maps.Map _map01 = new Xamarin.Forms.Maps.Map();
         private Pin _pin01;
         private MapSpan _mapSpan01;
         private Data_Tournament _upcomingTournament;
