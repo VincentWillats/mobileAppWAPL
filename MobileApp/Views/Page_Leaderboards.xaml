@@ -9,8 +9,8 @@
     <ContentPage.Content>
         <Grid BackgroundColor="Black">
             <Grid.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped"/>
-                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"/>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
             </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -28,13 +28,19 @@
 
             <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  Source="panallogo.png" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
 
-            <Label Grid.Row="4" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3"
-                   Text="Tap the Season number to pick another Season. 
-                   
-                   Double tap a player to see their stats for that Season."
+            <StackLayout Orientation="Vertical"  Grid.Row="4" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3">
+                <Label
+                   Text="Tap the Season number to pick another Season."
                    VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"
                    TextColor="Gold" FontSize="10"/>
+                <Label 
+                   Text="Double tap a player to see their stats for that Season."
+                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                   VerticalTextAlignment="Start" HorizontalTextAlignment="Center"
+                   TextColor="Gold" FontSize="10"/>
+            </StackLayout>
+            
           
 
             <Frame Grid.Row="3" Grid.Column="1" BackgroundColor="Black" BorderColor="Gold" Padding="5" CornerRadius="5">
@@ -69,7 +75,7 @@
                             VerticalOptions="FillAndExpand"
                             
                             TitleColor="Gold"
-                            SelectedIndexChanged="SeasonPicker_SelectedIndexChanged"/>
+                            SelectedItem="{Binding SelectedSeason}"/>
 
                     <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="0" CornerRadius="5" BackgroundColor="Black" BorderColor="Gold">
                         <Grid>
@@ -93,11 +99,11 @@
                                    HorizontalOptions="Center"/>
                             <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                         BackgroundColor="Gold" />
-                            <ActivityIndicator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Color="Gold" x:Name="activityIndicator" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <ActivityIndicator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Color="Gold" x:Name="activityIndicator" IsRunning="{Binding LeaderboardLoading}" VerticalOptions="Center" HorizontalOptions="Center"/>
                             <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                             ItemsSource="{Binding LeaderboardEntries}"
                             HasUnevenRows="True" BackgroundColor="Transparent"
-                            ItemTapped="ListView_ItemTapped">
+                            SelectedItem="{Binding ObjItemSelected}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
