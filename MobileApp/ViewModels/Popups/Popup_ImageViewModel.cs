@@ -40,7 +40,6 @@ namespace MobileApp.ViewModels
 
         public Popup_ImageViewModel(Data_Image imageObj)
         {
-            //_navigation = navigation;
             Image = (Data_Image)imageObj;
             ClosePopupCommand = new Command(ClosePopup); 
         }
