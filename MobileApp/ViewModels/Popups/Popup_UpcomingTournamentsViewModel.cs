@@ -32,6 +32,7 @@ namespace MobileApp.ViewModels
         private Xamarin.Forms.Maps.Map _map01;
         private Pin _pin01;
         private MapSpan _mapSpan01;
+        private Data_Tournament _upcomingTournament;
 
         public Xamarin.Forms.Maps.Map Map01
         {
@@ -43,30 +44,37 @@ namespace MobileApp.ViewModels
             }
         }
 
-        public Data_Tournament upcomingTournament { get; private set; }
-
+        public Data_Tournament UpcomingTournament
+        {
+            get { return _upcomingTournament; }
+            set
+            {
+                _upcomingTournament = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Command SwipedBackCommand { get; }
 
         public Popup_UpcomingTournamentsViewModel(INavigation navigation, object selectedItem)
         {
             _navigation = navigation;
-            upcomingTournament = (Data_Tournament)selectedItem;
+            UpcomingTournament = (Data_Tournament)selectedItem;
             SetMap();
             SwipedBackCommand = new Command(SwipedBack);
         }
 
         private async void SetMap()
         {
-            var address = upcomingTournament.Address01 + " " + upcomingTournament.Address02 + " " +
-                            upcomingTournament.Address03 + " " + upcomingTournament.Address04;
+            var address = UpcomingTournament.Address01 + " " + UpcomingTournament.Address02 + " " +
+                            UpcomingTournament.Address03 + " " + UpcomingTournament.Address04;
 
             var location = await Geocoding.GetLocationsAsync(address);
             var pos = new Position(location.FirstOrDefault().Latitude, location.FirstOrDefault().Longitude);
             _pin01 = new Pin
             {
                 Type = PinType.Place,
-                Label = upcomingTournament.VenueName,
+                Label = UpcomingTournament.VenueName,
                 Position = pos
             };
             _mapSpan01 = MapSpan.FromCenterAndRadius(pos, Distance.FromKilometers(2));
@@ -74,7 +82,6 @@ namespace MobileApp.ViewModels
             Map01.MoveToRegion(_mapSpan01);
             Map01.Pins.Add(_pin01);
         }
-
 
         private void SwipedBack()
         {
