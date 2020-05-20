@@ -360,3 +360,5 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/visualstudio,xamarinstudio
 MobileApp/Keys/Keys.cs
 MobileApp/Keys/Keys.cs
+MobileApp.Android/FirebaseService.cs
+MobileApp.Android/google-services.json

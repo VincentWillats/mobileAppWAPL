@@ -30,7 +30,15 @@ namespace MobileApp.ViewModels
         public MainPageViewModel(INavigation navigation)
         {
             _navigation = navigation;
-            PageClickCommand = new Command<Label>(async (x) => await OpenPage(x)); 
+            PageClickCommand = new Command<Label>(async (x) => await OpenPage(x));
+
+            //MessagingCenter.Subscribe<string>(this, "Update", (sender) =>
+            //{
+            //    Device.BeginInvokeOnMainThread(() =>
+            //    {
+            //        System.Diagnostics.Debug.WriteLine(sender.ToString());
+            //    });
+            //});
         }
 
         private async Task OpenPage(Label whatButton)
