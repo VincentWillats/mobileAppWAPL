@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using FormsToolkit.Droid;
 using Android.Gms.Common;
+using Android.Graphics;
 
 namespace MobileApp.Droid
 {
@@ -19,6 +20,7 @@ namespace MobileApp.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+
             base.OnCreate(savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
@@ -26,6 +28,7 @@ namespace MobileApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Toolkit.Init();
             LoadApplication(new App());
+            Window.SetStatusBarColor(Color.Black);
 
             if (IsPlayServiceAvailable() == false)
             {
