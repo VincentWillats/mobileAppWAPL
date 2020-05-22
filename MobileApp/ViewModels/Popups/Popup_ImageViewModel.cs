@@ -46,6 +46,7 @@ namespace MobileApp.ViewModels
 
         private void ClosePopup()
         {
+            AudioController.PlayClick();
             PopupNavigation.Instance.PopAsync();
         }
 

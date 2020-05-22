@@ -52,6 +52,7 @@ namespace MobileApp.Droid
             {
                 // Do something if there are not any pages in the `PopupStack`
             }
+            AudioController.PlayClick();
         }
 
 

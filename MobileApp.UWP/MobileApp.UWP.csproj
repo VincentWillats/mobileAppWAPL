@@ -107,6 +107,8 @@
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\roundlogo.png" />
+    <AndroidResource Include="Assets\settingsIcon.png" />
+    <Content Include="Assets\settingsIconBigger.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
@@ -149,6 +151,9 @@
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>2.0.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer">
+      <Version>1.4.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.657" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />

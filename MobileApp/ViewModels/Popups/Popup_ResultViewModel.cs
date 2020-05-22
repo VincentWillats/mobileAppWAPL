@@ -72,6 +72,7 @@ namespace MobileApp.ViewModels
                     _imgItemSelected = value;
                     if(_imgItemSelected != null)
                     {
+                        AudioController.PlayClick();
                         OpenImage(_imgItemSelected);
                         _imgItemSelected = null;
                         OnPropertyChanged();
@@ -90,6 +91,7 @@ namespace MobileApp.ViewModels
                     _resultSelected = value;
                     if (_resultSelected != null)
                     {
+                        AudioController.PlayClick();
                         ResultClicked(_resultSelected.player);
                         _resultSelected = null;
                         OnPropertyChanged();

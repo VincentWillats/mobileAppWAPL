@@ -97,13 +97,14 @@ namespace MobileApp.ViewModels
 
         private async void TournamentClicked(Data_Tournament tourny)
         {
-            if(pageLoading) { return; }
+            if(pageLoading) { return; }            
             await OpenUpcomingTournament(tourny);
         }
 
         private async Task OpenUpcomingTournament(Data_Tournament tourny)
         {
             pageLoading = true;
+            AudioController.PlayClick();
             await _navigation.PushPopupAsync(new Popup_UpcomingTournaments(tourny));
             pageLoading = false;
         }

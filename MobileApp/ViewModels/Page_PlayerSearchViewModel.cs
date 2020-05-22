@@ -63,6 +63,7 @@ namespace MobileApp.ViewModels
                     _objItemSelected = value;
                     if (_objItemSelected != null)
                     {
+                        AudioController.PlayClick();
                         DisplayPlayerProfile(_objItemSelected);
                         _objItemSelected = null;
                         OnPropertyChanged();

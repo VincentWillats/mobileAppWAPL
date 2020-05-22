@@ -24,6 +24,7 @@ namespace MobileApp.ViewModels
     {
         private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
+        private bool firstLoad = true;
 
         private bool _leaderboardLoading;
         private Data_LeaderboardEntry _objItemSelected;
@@ -33,11 +34,13 @@ namespace MobileApp.ViewModels
 
         public int SelectedSeason
         {
+
             get { return _selectedSeason; }
             set
             {
-                _selectedSeason = value;
-                OnPropertyChanged();
+                _selectedSeason = value;                
+                OnPropertyChanged();    
+                if(!firstLoad) { AudioController.PlayClick(); }
                 LoadSesonLeaderboard(_selectedSeason);
             }
         }
@@ -71,7 +74,7 @@ namespace MobileApp.ViewModels
                 {
                     _objItemSelected = value;
                     if (_objItemSelected != null)
-                    {
+                    {                        
                         LoadPlayerProfile(_objItemSelected.player, _objItemSelected.SeasonID);
                         _objItemSelected = null;
                         OnPropertyChanged();
@@ -109,6 +112,7 @@ namespace MobileApp.ViewModels
 
         private async void LoadPlayerProfile(object player, int seasonID)
         {
+            AudioController.PlayClick();
             await _navigation.PushAsync(new Page_PlayerProfile(player, seasonID));
         }
 
@@ -116,6 +120,7 @@ namespace MobileApp.ViewModels
         {
             Seasons = await Controller_SQL.LoadSeasonList();
             SelectedSeason = Seasons[0];
+            firstLoad = false;
         }
 
         private void SwipedBack()
