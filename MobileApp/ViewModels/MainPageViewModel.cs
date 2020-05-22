@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileApp.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -23,6 +24,7 @@ namespace MobileApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Command PageClickCommand { get; }
+        public Command SettingsClickCommand { get; }
 
         bool pageLoading = false;
 
@@ -31,6 +33,7 @@ namespace MobileApp.ViewModels
         {
             _navigation = navigation;
             PageClickCommand = new Command<Label>(async (x) => await OpenPage(x));
+            SettingsClickCommand = new Command<Image>(async (x) => await OpenSettings(x));
 
             //MessagingCenter.Subscribe<string>(this, "Update", (sender) =>
             //{
@@ -40,6 +43,20 @@ namespace MobileApp.ViewModels
             //    });
             //});
         }
+        private async Task OpenSettings(Image whatImage)
+        {
+            string whatPage = whatImage.ClassId;
+            if (pageLoading) { return; }
+            pageLoading = true;
+            switch (whatPage)
+            {
+                case "settings":
+                    await _navigation.PushAsync(new Page_Settings());
+                    break;
+            }
+            pageLoading = false;
+        }
+
 
         private async Task OpenPage(Label whatButton)
         {
