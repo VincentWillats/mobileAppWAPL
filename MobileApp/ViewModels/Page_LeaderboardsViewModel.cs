@@ -33,11 +33,12 @@ namespace MobileApp.ViewModels
 
         public int SelectedSeason
         {
+
             get { return _selectedSeason; }
             set
             {
-                _selectedSeason = value;
-                OnPropertyChanged();
+                _selectedSeason = value;                
+                OnPropertyChanged();                
                 LoadSesonLeaderboard(_selectedSeason);
             }
         }
@@ -71,7 +72,7 @@ namespace MobileApp.ViewModels
                 {
                     _objItemSelected = value;
                     if (_objItemSelected != null)
-                    {
+                    {                        
                         LoadPlayerProfile(_objItemSelected.player, _objItemSelected.SeasonID);
                         _objItemSelected = null;
                         OnPropertyChanged();
@@ -109,6 +110,7 @@ namespace MobileApp.ViewModels
 
         private async void LoadPlayerProfile(object player, int seasonID)
         {
+            AudioController.PlayClick();
             await _navigation.PushAsync(new Page_PlayerProfile(player, seasonID));
         }
 

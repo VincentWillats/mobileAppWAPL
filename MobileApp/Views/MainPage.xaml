@@ -20,15 +20,14 @@
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0" Grid.Row="0" ClassId="settings" Grid.ColumnSpan="3" x:Name="SettingsImg" Grid.RowSpan="2" Margin="10" Source="settingsIconSmaller.png" VerticalOptions="Start" HorizontalOptions="End">
+        <Image Grid.Column="0" Grid.Row="0" ClassId="settings" Grid.ColumnSpan="3" x:Name="SettingsImg" Grid.RowSpan="2" Margin="20" Source="settingsIconSmaller.png" VerticalOptions="Start" HorizontalOptions="End">
             <Image.GestureRecognizers>
-                <TapGestureRecognizer
-                                 Command="{Binding SettingsClickCommand}" 
-                            CommandParameter="{x:Reference SettingsImg}"/>
+                <TapGestureRecognizer   Command="{Binding SettingsClickCommand}" 
+                                        CommandParameter="{x:Reference SettingsImg}"/>
             </Image.GestureRecognizers>
         </Image>
 
-        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Source="roundlogo.png" VerticalOptions="Center"/>
+        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Source="roundlogo.png" VerticalOptions="Center" InputTransparent="True"/>
         <Grid Grid.Row="3" Grid.Column="1" Padding="0" BackgroundColor="Transparent">
               <Grid.RowDefinitions>
                 <RowDefinition Height="20*"/>

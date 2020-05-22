@@ -45,6 +45,7 @@ namespace MobileApp.ViewModels
         }
         private async Task OpenSettings(Image whatImage)
         {
+            AudioController.PlayClick();
             string whatPage = whatImage.ClassId;
             if (pageLoading) { return; }
             pageLoading = true;
@@ -60,6 +61,7 @@ namespace MobileApp.ViewModels
 
         private async Task OpenPage(Label whatButton)
         {
+            AudioController.PlayClick();
             string whatPage = whatButton.ClassId;
             if (pageLoading) { return; }
             pageLoading = true;

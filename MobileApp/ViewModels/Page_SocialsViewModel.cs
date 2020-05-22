@@ -40,6 +40,7 @@ namespace MobileApp.ViewModels
 
         private async Task SocialClicked(Image img)
         {
+            AudioController.PlayClick();
             string name = img.ClassId;
             switch (name)
             {

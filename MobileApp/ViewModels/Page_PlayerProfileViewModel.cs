@@ -74,6 +74,7 @@ namespace MobileApp.ViewModels
                 {
                     _seasonPicked = value;
                     OnPropertyChanged();
+                    AudioController.PlayClick();
                     LoadPlayerStats(_player.PlayerID, _seasonPicked);
                 }
 

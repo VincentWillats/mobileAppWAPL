@@ -48,7 +48,7 @@ namespace MobileApp.ViewModels
                 {
                     _objItemSelected = value;
                     if(_objItemSelected != null)
-                    {
+                    {                        
                         TournamentClicked(_objItemSelected);
                         _objItemSelected = null;
                         OnPropertyChanged();
@@ -85,6 +85,7 @@ namespace MobileApp.ViewModels
         {
             if (pageLoading) { return; }  
             pageLoading = true;
+            AudioController.PlayClick();
             await _navigation.PushPopupAsync(new Popup_Result(result));            
             pageLoading = false;                    
         }

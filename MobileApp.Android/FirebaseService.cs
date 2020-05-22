@@ -11,6 +11,9 @@ using System.Linq;
 using System.Net;
 using WindowsAzure.Messaging;
 using Xamarin.Forms;
+using MobileApp.ViewModels;
+using Android.Service.Carrier;
+using Xamarin.Essentials;
 
 namespace MobileApp.Droid
 {
@@ -18,6 +21,12 @@ namespace MobileApp.Droid
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT"})]
     class FirebaseService : FirebaseMessagingService
     {
+        bool _notifcationsForUpcomingTournaments = true;
+        bool _notifcationsForResults = true;
+        bool _notifcationsForSpecialEvents = true;
+        bool _notifcationsForSpecialOffers = true;
+
+
         public static string FCMTemplateBody { get; set; } =    "{" +
                                                                     "\"data\":" +
                                                                         "{" +
@@ -51,7 +60,6 @@ namespace MobileApp.Droid
         public static string NotificationName03 = "Special Offer";
         public static string NotificationName04 = "Special Event";
 
-
         public override void OnNewToken(string token)
         {
             base.OnNewToken(token);
@@ -78,6 +86,7 @@ namespace MobileApp.Droid
 
         public override void OnMessageReceived(RemoteMessage message)
         {
+            LoadSettings();
             base.OnMessageReceived(message);
             try
             {
@@ -87,13 +96,11 @@ namespace MobileApp.Droid
             {
                 System.Diagnostics.Debug.WriteLine("Error sending message via MessagingCenter: " + e.Message);
             }
-
             SendLocalNotification(message.Data);
         }
 
         void SendLocalNotification(IDictionary<string, string> data)
-        {
-
+        {            
             var intent = new Intent(this, typeof(MainActivity));
             var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
             //var notificationManager = (NotificationManager)GetSystemService(NotificationService);
@@ -119,6 +126,11 @@ namespace MobileApp.Droid
             data.TryGetValue("android_channel_id", out channel);
             data.TryGetValue("title", out title);
             data.TryGetValue("image", out largeImg);
+
+            if(channel == "UpcomingTournament" && _notifcationsForUpcomingTournaments == false) { return; }
+            if(channel == "Result" && _notifcationsForResults == false) { return; }
+            if(channel == "SpecialOffer" && _notifcationsForSpecialOffers == false) { return; }
+            if(channel == "SpecialEvent" && _notifcationsForSpecialEvents == false) { return; }
 
             if (!string.IsNullOrEmpty(largeImg))
             {
@@ -157,6 +169,14 @@ namespace MobileApp.Droid
             }
 
             return imageBitmap;
+        }
+
+        private void LoadSettings()
+        {
+            _notifcationsForUpcomingTournaments = Preferences.Get("UpcomingTournaments", true);
+            _notifcationsForResults = Preferences.Get("Result", true);
+            _notifcationsForSpecialEvents = Preferences.Get("SpecialEvents", true);
+            _notifcationsForSpecialOffers = Preferences.Get("SpecialOffers", true);
         }
     }
 }
