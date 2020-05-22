@@ -16,7 +16,7 @@ using MobileApp.Keys;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: MetaData("com.google.android.geo.API_KEY", Value = Keys.MapKey)]
+[assembly: MetaData("com.google.android.geo.API_KEY", Value = Keys._MapKey)]
 
 // Version information for an assembly consists of the following four values:
 //
