@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using FormsToolkit.Droid;
+using Android.Gms.Common;
 
 namespace MobileApp.Droid
 {
@@ -25,6 +26,12 @@ namespace MobileApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Toolkit.Init();
             LoadApplication(new App());
+
+            if (IsPlayServiceAvailable() == false)
+            {
+                throw new Exception("This device does not have Google Play Services and cannot receive push notifications.");
+            }
+            CreateNotificationChannel();
         }
 
 
@@ -47,6 +54,72 @@ namespace MobileApp.Droid
             }
         }
 
+
+        //protected override void OnNewIntent(Intent intent)
+        //{
+        //    if (intent.Extras != null)
+        //    {
+        //        var message = intent.GetStringExtra("message");
+        //        (App.Current.MainPage as MainPage)?.AddMessage(message);
+        //    }
+
+        //    base.OnNewIntent(intent);
+        //}
+
+        bool IsPlayServiceAvailable()
+        {
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            if (resultCode != ConnectionResult.Success)
+            {
+                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                    Console.WriteLine("MainActivity", GoogleApiAvailability.Instance.GetErrorString(resultCode));
+                else
+                {
+                    Console.WriteLine("MainActivity", "This device is not supported");
+                }
+                return false;
+            }
+            return true;
+        }
+
+        public void CreateNotificationChannel()
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+            {
+                // Notification channels are new in API 26 (and not a part of the
+                // support library). There is no need to create a notification
+                // channel on older versions of Android.
+                return;
+            }
+            var upcomingTournament = new NotificationChannel(FirebaseService.CHANNEL_ID01, FirebaseService.channelName01, NotificationImportance.High)
+            {
+                Description = "Upcoming Tournaments"
+            };
+            var results = new NotificationChannel(FirebaseService.CHANNEL_ID02, FirebaseService.channelName02, NotificationImportance.High)
+            {
+                Description = "Tournament Results"
+            };
+            var specialOffer = new NotificationChannel(FirebaseService.CHANNEL_ID03, FirebaseService.channelName03, NotificationImportance.High)
+            {
+                Description = "Special Offers"
+            };
+            var specialEvent = new NotificationChannel(FirebaseService.CHANNEL_ID04, FirebaseService.channelName04, NotificationImportance.High)
+            {
+                Description = "Special Events"
+                
+            };
+            upcomingTournament.EnableVibration(true);
+            results.EnableVibration(true);
+            specialOffer.EnableVibration(true);
+            specialEvent.EnableVibration(true);
+
+            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+            notificationManager.CreateNotificationChannel(upcomingTournament);
+            notificationManager.CreateNotificationChannel(results);
+            notificationManager.CreateNotificationChannel(specialOffer);
+            notificationManager.CreateNotificationChannel(specialEvent);
+            
+        }
 
     }
 }

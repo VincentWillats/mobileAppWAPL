@@ -28,8 +28,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|Any CPU.Build.0 = Debug|x86
-		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|ARM.ActiveCfg = Debug|ARM
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|ARM.Build.0 = Debug|ARM
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -46,8 +44,6 @@ Global
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|x86.Build.0 = Debug|x86
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Debug|x86.Deploy.0 = Debug|x86
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Release|Any CPU.ActiveCfg = Release|x86
-		{93EE3AF8-8364-4D32-94F0-E29461060039}.Release|Any CPU.Build.0 = Release|x86
-		{93EE3AF8-8364-4D32-94F0-E29461060039}.Release|Any CPU.Deploy.0 = Release|x86
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Release|ARM.ActiveCfg = Release|ARM
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Release|ARM.Build.0 = Release|ARM
 		{93EE3AF8-8364-4D32-94F0-E29461060039}.Release|ARM.Deploy.0 = Release|ARM
@@ -100,8 +96,6 @@ Global
 		{1DCEC759-BA15-40C2-9FCC-D86CC342EC2C}.Release|x86.Build.0 = Release|Any CPU
 		{1DCEC759-BA15-40C2-9FCC-D86CC342EC2C}.Release|x86.Deploy.0 = Release|Any CPU
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|Any CPU.ActiveCfg = Debug|iPhone
-		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|Any CPU.Build.0 = Debug|iPhone
-		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|Any CPU.Deploy.0 = Debug|iPhone
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|ARM.Build.0 = Debug|iPhoneSimulator
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|ARM.Deploy.0 = Debug|iPhoneSimulator
@@ -118,8 +112,6 @@ Global
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|x86.Build.0 = Debug|iPhone
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Debug|x86.Deploy.0 = Debug|iPhone
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Release|Any CPU.ActiveCfg = Release|iPhone
-		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Release|Any CPU.Build.0 = Release|iPhone
-		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Release|Any CPU.Deploy.0 = Release|iPhone
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Release|ARM.ActiveCfg = Release|iPhone
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Release|ARM.Build.0 = Release|iPhone
 		{6B609529-BC50-45C3-93DF-C447ECA49A3D}.Release|ARM.Deploy.0 = Release|iPhone
