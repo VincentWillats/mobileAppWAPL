@@ -24,6 +24,7 @@ namespace MobileApp.ViewModels
     {
         private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
+        private bool firstLoad = true;
 
         private bool _leaderboardLoading;
         private Data_LeaderboardEntry _objItemSelected;
@@ -38,7 +39,8 @@ namespace MobileApp.ViewModels
             set
             {
                 _selectedSeason = value;                
-                OnPropertyChanged();                
+                OnPropertyChanged();    
+                if(!firstLoad) { AudioController.PlayClick(); }
                 LoadSesonLeaderboard(_selectedSeason);
             }
         }
@@ -118,6 +120,7 @@ namespace MobileApp.ViewModels
         {
             Seasons = await Controller_SQL.LoadSeasonList();
             SelectedSeason = Seasons[0];
+            firstLoad = false;
         }
 
         private void SwipedBack()

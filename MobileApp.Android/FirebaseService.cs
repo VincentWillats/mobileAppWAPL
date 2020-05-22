@@ -120,7 +120,7 @@ namespace MobileApp.Droid
             string channel = "";
             string title = "";
             string largeImg = "";
-            Bitmap img = null;
+            Bitmap largeImgBitmap = null;
 
             data.TryGetValue("message", out message);
             data.TryGetValue("android_channel_id", out channel);
@@ -134,11 +134,11 @@ namespace MobileApp.Droid
 
             if (!string.IsNullOrEmpty(largeImg))
             {
-                img = GetImageBitmapFromUrl(largeImg);
+                largeImgBitmap = GetImageBitmapFromUrl(largeImg);
             }
             else
             {
-                img = BitmapFactory.DecodeResource(Resources, Resource.Drawable.roundlogo);
+                largeImgBitmap = BitmapFactory.DecodeResource(Resources, Resource.Drawable.roundlogo);
             }
 
 
@@ -146,11 +146,11 @@ namespace MobileApp.Droid
 
             var notificationBuilder = new NotificationCompat.Builder(this, channel)
                 .SetContentTitle(title)
-                .SetSmallIcon(Resource.Drawable.ic_launcher)
+                .SetSmallIcon(Resource.Drawable.tinyWhiteIcon)
                 .SetContentText(message)
                 .SetAutoCancel(true)
                 .SetShowWhen(false)
-                .SetLargeIcon(img)
+                .SetLargeIcon(largeImgBitmap)
                 .SetContentIntent(pendingIntent);              
             notificationManager.Notify(0, notificationBuilder.Build());
         }

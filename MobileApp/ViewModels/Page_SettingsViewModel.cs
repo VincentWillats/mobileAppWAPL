@@ -147,7 +147,7 @@ namespace MobileApp.ViewModels
             NotifcationsForResults = Preferences.Get("Result", true);
             NotifcationsForSpecialEvents = Preferences.Get("SpecialEvents", true);
             NotifcationsForSpecialOffers = Preferences.Get("SpecialOffers", true);
-            ApplicationSounds = Preferences.Get("AppSounds", true);
+            ApplicationSounds = Preferences.Get("AppSounds", false);
         }
 
         private void SwipedBack()

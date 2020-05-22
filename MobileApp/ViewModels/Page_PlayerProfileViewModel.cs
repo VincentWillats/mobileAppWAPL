@@ -15,6 +15,7 @@ using Xamarin.Forms;
  * Contact Email:   Vincentwillats.software@gmail.com
  * 
  * Changelog:
+ * 22/05/2020 -- Added click sounds
  * 19/05/2020 -- Moved to MVVM
  */
 
@@ -27,6 +28,7 @@ namespace MobileApp.ViewModels
 
         private int _seasonPicked = -1;
         private bool _statsLoading;
+        private bool firstLoad = true;
         private Data_Player _player;
         private string _playerName;
 
@@ -71,10 +73,9 @@ namespace MobileApp.ViewModels
             set
             {                
                 if(value >= 1)
-                {
+                {                    
                     _seasonPicked = value;
-                    OnPropertyChanged();
-                    AudioController.PlayClick();
+                    OnPropertyChanged();                    
                     LoadPlayerStats(_player.PlayerID, _seasonPicked);
                 }
 
@@ -87,10 +88,9 @@ namespace MobileApp.ViewModels
         public Page_PlayerProfileViewModel(INavigation navigation, object playerObj)
         {
             _navigation = navigation;
-
+            //firstLoad = true;
             _player = (Data_Player)playerObj;
-            StatsToShow = new ObservableCollection<Data_Stat>();
-            
+            StatsToShow = new ObservableCollection<Data_Stat>();            
 
             LoadPlayerSeasonsPlayedList(_player.PlayerID);
             PlayerName = _player.FullName;
@@ -106,24 +106,27 @@ namespace MobileApp.ViewModels
             _seasonPicked = seasonID;
 
             LoadPlayerSeasonsPlayedList(_player.PlayerID);
-            PlayerName = _player.FullName;
-            
+            PlayerName = _player.FullName;            
         }
 
         private async void LoadPlayerSeasonsPlayedList(int playerID)
         {           
             SeasonsIn = await Controller_SQL.LoadPlayerPlayedSeasons(playerID);   
             if(SeasonsIn.Count <= 0) { return; }
-            SeasonPicked = (_seasonPicked != -1) ? SeasonsIn[SeasonsIn.IndexOf(_seasonPicked)] : SeasonsIn[0];    
+            SeasonPicked = (_seasonPicked != -1) ? SeasonsIn[SeasonsIn.IndexOf(_seasonPicked)] : SeasonsIn[0];
+            firstLoad = false;
         }
 
         private async void LoadPlayerStats(int playerID, int seasonID)
         {
-            StatsLoading = true;
+            if (seasonID == -1) { return; }
+            StatsLoading = true;            
+            if (firstLoad == false) { AudioController.PlayClick(); }            
             Data_PlayerStats _playerStats = await Controller_SQL.LoadPlayerStats(playerID, seasonID);        
             PlayerStats = _playerStats;
             PlayerStats.Player = _player;
             AddStatsToShow();
+
             StatsLoading = false;
         }
 

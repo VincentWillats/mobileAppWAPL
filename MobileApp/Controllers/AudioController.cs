@@ -5,12 +5,12 @@ using Xamarin.Essentials;
 
 namespace MobileApp
 {
-    class AudioController
+    public class AudioController
     {
         private static bool isLoaded = false;
         public static void PlayClick()
         {
-            if (!Preferences.Get("AppSounds", true))
+            if (!Preferences.Get("AppSounds", false))
             {
                 System.Diagnostics.Debug.WriteLine("click off");
                 return;
@@ -20,9 +20,7 @@ namespace MobileApp
             if (!isLoaded)
             {
                 player.Load("click.wav");
-            }
-            
-
+            }         
             player.Play();
         }
     }
