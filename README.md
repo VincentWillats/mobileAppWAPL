@@ -8,4 +8,8 @@ Todo -
 * ~~Create Azure notifcation Hub backend~~
 * ~~Add preference page to enable/disable notifcations in app~~
 * ~~Add options to pinch zoom on event images.~~
-* Add filters for free/pro league tournaments
+* ~~Filted out free league tournaments from SQL~~
+* Add tab for free league tournaments
+* Make views for iOS and test
+* Add push notifcations for iOS
+
