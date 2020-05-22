@@ -54,6 +54,18 @@ namespace MobileApp.Droid
             }
         }
 
+
+        //protected override void OnNewIntent(Intent intent)
+        //{
+        //    if (intent.Extras != null)
+        //    {
+        //        var message = intent.GetStringExtra("message");
+        //        (App.Current.MainPage as MainPage)?.AddMessage(message);
+        //    }
+
+        //    base.OnNewIntent(intent);
+        //}
+
         bool IsPlayServiceAvailable()
         {
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
@@ -79,17 +91,34 @@ namespace MobileApp.Droid
                 // channel on older versions of Android.
                 return;
             }
-            var upcomingTournament = new NotificationChannel(FirebaseService.CHANNEL_ID01, FirebaseService.name01, NotificationImportance.High)
+            var upcomingTournament = new NotificationChannel(FirebaseService.CHANNEL_ID01, FirebaseService.channelName01, NotificationImportance.High)
             {
                 Description = "Upcoming Tournaments"
             };
-            var results = new NotificationChannel(FirebaseService.CHANNEL_ID02, FirebaseService.name02, NotificationImportance.High)
+            var results = new NotificationChannel(FirebaseService.CHANNEL_ID02, FirebaseService.channelName02, NotificationImportance.High)
             {
                 Description = "Tournament Results"
             };
+            var specialOffer = new NotificationChannel(FirebaseService.CHANNEL_ID03, FirebaseService.channelName03, NotificationImportance.High)
+            {
+                Description = "Special Offers"
+            };
+            var specialEvent = new NotificationChannel(FirebaseService.CHANNEL_ID04, FirebaseService.channelName04, NotificationImportance.High)
+            {
+                Description = "Special Events"
+                
+            };
+            upcomingTournament.EnableVibration(true);
+            results.EnableVibration(true);
+            specialOffer.EnableVibration(true);
+            specialEvent.EnableVibration(true);
+
             var notificationManager = (NotificationManager)GetSystemService(NotificationService);
             notificationManager.CreateNotificationChannel(upcomingTournament);
             notificationManager.CreateNotificationChannel(results);
+            notificationManager.CreateNotificationChannel(specialOffer);
+            notificationManager.CreateNotificationChannel(specialEvent);
+            
         }
 
     }
