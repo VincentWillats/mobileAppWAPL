@@ -62,12 +62,13 @@
                 <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                        TextColor="Gold"
                        Text="{Binding UpcomingTournament.ResultListDescription}"
-                       FontSize="10"
+                       FontSize="12"
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"/>
 
                 <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Gold"/>
-                <Grid Grid.Row="4" Grid.Column="0" VerticalOptions="Center">
+                <ScrollView Grid.Row="4" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -102,6 +103,7 @@
                            TextColor="Gold"
                            FontSize="14"/>
                 </Grid>
+                </ScrollView>
                 <ContentView Content="{Binding Map01}
                         " Grid.Row="4" Grid.Column="1"/>
             </Grid>
