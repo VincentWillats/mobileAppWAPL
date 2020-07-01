@@ -30,10 +30,18 @@ namespace MobileApp
             get
             {
                 return RegoDate.ToShortTimeString() + " Registration, " + StartDate.ToShortTimeString() +
-                      " Start!" + "\n" + "$50 Freeze-out, $42 towards Cash prize.\n" +
-                      "Cash tables avaliable from " + StartDate.ToShortTimeString();
+                      " Start!" + "\n" + Buyin.ToString("c0") + " Freeze-out, " + ToCashPrize().ToString("c0") + " towards prizes.\n" +
+                      "Cash tables avaliable from " + RegoDate.ToShortTimeString();
             }
         }
+        private decimal ToCashPrize()
+        {
+            decimal howMany50 = Buyin / 50;
+            decimal reggo = 8 * howMany50;
+            decimal toCashPrize = Buyin - reggo;
+            return toCashPrize;
+        }
+
         public string VenueName { get; set; }
         public string Address01 { get; set; }
         public string Address02 { get; set; }

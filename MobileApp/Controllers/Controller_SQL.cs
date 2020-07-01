@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 using System.Linq;
 
 /* SQL Controller 
- * 
- * 
- * Todo:
- * Move to static functions.
+ *  * 
+ * Todo: 
  * 
  * 
  * Creator:         Vincent Willats
@@ -21,6 +19,7 @@ using System.Linq;
  * Contact Email:   Vincentwillats.software@gmail.com
  * 
  * Changelog:
+ * 01/07/2020 -- Added try/catches (whoops!)
  * 05/04/2020 -- Added LoadLeaderboardStats, LoadSeasonList
  * 30/03/2020 -- Updated to work with Actual Database structure of WAPL
  * 29/03/2020 -- Working LoadResultsAsync(), LoadPlayerSearchedListAsync()
@@ -38,12 +37,19 @@ namespace MobileApp
         {
             string funcName = "GetUpcomingTournaments";
             List<Data_Tournament> upcomingTournamentList = new List<Data_Tournament>();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
 
-            HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            upcomingTournamentList = JsonConvert.DeserializeObject<List<Data_Tournament>>(responseBody);
+                upcomingTournamentList = JsonConvert.DeserializeObject<List<Data_Tournament>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }   
+            
             return upcomingTournamentList;
         }
 
@@ -51,11 +57,18 @@ namespace MobileApp
         {
             string funcName = "GetResultsGeneral";
             List<Data_Result>       results =              new List<Data_Result>();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                results = JsonConvert.DeserializeObject<List<Data_Result>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
 
-            HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();  
-            results = JsonConvert.DeserializeObject<List<Data_Result>>(responseBody);  
             return results;
         }
 
@@ -63,13 +76,19 @@ namespace MobileApp
         {
             string funcName = "GetPlayerSearchList";
             List<Data_Player> players = new List<Data_Player>();
-
-            var stringToSearch = new StringContent(searchStr);
-            
-            HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, stringToSearch);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();            
-            players = JsonConvert.DeserializeObject<List<Data_Player>>(responseBody);
+           
+            try
+            {
+                var stringToSearch = new StringContent(searchStr);
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, stringToSearch);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                players = JsonConvert.DeserializeObject<List<Data_Player>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
 
             return players;
         }
@@ -79,12 +98,20 @@ namespace MobileApp
             string funcName = "GetResultDetailPlayers";
             List<Data_ResultDetailPlayer> players = new List<Data_ResultDetailPlayer>();
 
-            var strTournyID = new StringContent(tournyID.ToString());
+            try
+            {
+                var strTournyID = new StringContent(tournyID.ToString());
 
-            HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strTournyID);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            players = JsonConvert.DeserializeObject<List<Data_ResultDetailPlayer>>(responseBody);
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strTournyID);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                players = JsonConvert.DeserializeObject<List<Data_ResultDetailPlayer>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
+
 
             return players;
         }
@@ -93,14 +120,20 @@ namespace MobileApp
         {
             string funcName = "GetResultImages";
             List<Data_Image> images = new List<Data_Image>();
-            
-            var strTournyID = new StringContent(tournyID.ToString());
-            
-            HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strTournyID);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            images = JsonConvert.DeserializeObject<List<Data_Image>>(responseBody);
-            System.Diagnostics.Debug.WriteLine("Image count: " + images.Count);
+            try
+            {
+                var strTournyID = new StringContent(tournyID.ToString());
+
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strTournyID);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                images = JsonConvert.DeserializeObject<List<Data_Image>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
+
             return images;
         }
 
@@ -108,26 +141,41 @@ namespace MobileApp
         {
             Data_PlayerStats playerStats = new Data_PlayerStats();
             string funcName = "GetPlayerStats";
-            var searchIDs = new StringContent(playerID.ToString() + "+" + seasonID.ToString());
+            try
+            {
+                var searchIDs = new StringContent(playerID.ToString() + "+" + seasonID.ToString());
 
-            HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, searchIDs);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            playerStats = JsonConvert.DeserializeObject<Data_PlayerStats>(responseBody);
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, searchIDs);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                playerStats = JsonConvert.DeserializeObject<Data_PlayerStats>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
+
             return playerStats;
         }
 
         public static async Task<List<int>> LoadPlayerPlayedSeasons(int playerID)
         {
-            List<int> seasonsPlayedIn;
+            List<int> seasonsPlayedIn = new List<int>();
             string funcName = "GetPlayerSeasonList";
             var strPlayerID = new StringContent(playerID.ToString());
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strPlayerID);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseBody);
+                seasonsPlayedIn = JsonConvert.DeserializeObject<List<int>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
 
-            HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strPlayerID);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine(responseBody);
-            seasonsPlayedIn = JsonConvert.DeserializeObject<List<int>>(responseBody);
             return seasonsPlayedIn;
         }
 
@@ -135,11 +183,19 @@ namespace MobileApp
         {
             List<int> seasons = new List<int>();
             string funcName = "GetSeasonList";
-            HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine(responseBody);
-            seasons = JsonConvert.DeserializeObject<List<int>>(responseBody);
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseBody);
+                seasons = JsonConvert.DeserializeObject<List<int>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
+
             return seasons;
         }
 
@@ -147,13 +203,20 @@ namespace MobileApp
         {
             string funcName = "GetLeaderboardEntries";
             List<Data_LeaderboardEntry> leaderboardEntries = new List<Data_LeaderboardEntry>();
+            try
+            {
+                var strTournyID = new StringContent(seasonID.ToString());
 
-            var strTournyID = new StringContent(seasonID.ToString());
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strTournyID);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                leaderboardEntries = JsonConvert.DeserializeObject<List<Data_LeaderboardEntry>>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
 
-            HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, strTournyID);
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            leaderboardEntries = JsonConvert.DeserializeObject<List<Data_LeaderboardEntry>>(responseBody);
             return leaderboardEntries;
         }
     }
