@@ -48,6 +48,18 @@ namespace MobileApp.ViewModels
             set
             {
                 _imageLoading = value;
+                NoImageText = !_imageLoading;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _NoImageText;
+        public bool NoImageText
+        {
+            get { return _NoImageText; }
+            set
+            {
+                _NoImageText = value;
                 OnPropertyChanged();
             }
         }

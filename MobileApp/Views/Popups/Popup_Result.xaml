@@ -84,6 +84,7 @@
                         </ListView>
                     </Frame>
                     <ActivityIndicator IsRunning="{Binding ImageLoading}" Grid.Row="1" Grid.Column="1"  Color="Gold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label IsVisible="{Binding NoImageText}" Grid.Row="1" Grid.Column="1" Text="No Images for event."  TextColor="Gold" FontSize="14" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     <Frame Grid.Row="1" Grid.Column="1" BorderColor="Gold" CornerRadius="5" BackgroundColor="Transparent" Margin="0,0,3,3" Padding="2">
                         <ListView ItemsSource="{Binding ImageList}"
                                 HasUnevenRows="True"
