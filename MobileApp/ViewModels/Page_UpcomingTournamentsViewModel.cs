@@ -1,4 +1,5 @@
-﻿using MobileApp.Pages.Popups;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -106,6 +107,13 @@ namespace MobileApp.ViewModels
             pageLoading = true;
             AudioController.PlayClick();
             await _navigation.PushPopupAsync(new Popup_UpcomingTournaments(tourny));
+            Analytics.TrackEvent("Viewed Tournament", new Dictionary<string, string>
+                    {
+                        {"Tournament Date", tourny.RegoDate.Date.ToShortDateString()}, 
+                        {"Tournament ID", tourny.TournamentID.ToString() }, 
+                        {"Tournament Venue", tourny.VenueName },  
+                        {"Tournament Buyin", tourny.Buyin.ToString() }
+                    });
             pageLoading = false;
         }
 

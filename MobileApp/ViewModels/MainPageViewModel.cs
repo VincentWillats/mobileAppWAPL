@@ -1,4 +1,5 @@
-﻿using MobileApp.Views;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,6 +54,8 @@ namespace MobileApp.ViewModels
             {
                 case "settings":
                     await _navigation.PushAsync(new Page_Settings());
+                    Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
+                    {{ "What Page", "Settings" }});
                     break;
             }
             pageLoading = false;
@@ -68,19 +71,34 @@ namespace MobileApp.ViewModels
             switch (whatPage)
             {
                 case "upcomingTournaments":
+                    Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
+                    {{ "What Page", "UpcomingTournaments" }});
                     await _navigation.PushAsync(new Page_UpcomingTournaments());
+                    
                     break;
                 case "leaderboards":
+                    Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
+                    {{ "What Page", "Leaderboards" }});
                     await _navigation.PushAsync(new Page_Leaderboards());
+                    
                     break;
                 case "results":
+                    Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
+                    {{ "What Page", "Results" }});
                     await _navigation.PushAsync(new Page_Results());
+                    
                     break;
                 case "playerSearch":
+                    Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
+                    {{ "What Page", "PlayerSearch" }});
                     await _navigation.PushAsync(new Page_PlayerSearch());
+                   
                     break;
                 case "socials":
+                    Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
+                    {{ "What Page", "Socials" }});
                     await _navigation.PushAsync(new Page_Socials());
+                    
                     break;
             }
             pageLoading = false;

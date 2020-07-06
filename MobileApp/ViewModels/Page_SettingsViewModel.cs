@@ -1,4 +1,5 @@
-﻿using MobileApp.Pages.Popups;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,11 @@ namespace MobileApp.ViewModels
                 Preferences.Set("UpcomingTournaments", _notifcationsForUpcomingTournaments);
                 MessagingCenter.Send<Page_SettingsViewModel, bool>(this, "UpdateNotifcationsForUpcomingTournaments", _notifcationsForUpcomingTournaments);
                 AudioController.PlayClick();
+                Analytics.TrackEvent("Toggle Push Notifcation", new Dictionary<string, string> 
+                {
+                    { "What Notifcation", "UpcomingTournaments" },
+                    { "Enabled?", _notifcationsForUpcomingTournaments.ToString()}
+                });
             }
         }
         public bool NotifcationsForResults
@@ -55,6 +61,11 @@ namespace MobileApp.ViewModels
                 Preferences.Set("Result", _notifcationsForResults);
                 MessagingCenter.Send<Page_SettingsViewModel, bool>(this, "UpdateNotifcationsForResults", _notifcationsForResults);
                 AudioController.PlayClick();
+                Analytics.TrackEvent("Toggle Push Notifcation", new Dictionary<string, string>
+                {
+                    { "What Notifcation", "Result" },
+                    { "Enabled?", _notifcationsForResults.ToString()}
+                });
             }
         }
         public bool NotifcationsForSpecialEvents
@@ -67,6 +78,11 @@ namespace MobileApp.ViewModels
                 Preferences.Set("SpecialEvents", _notifcationsForSpecialEvents);
                 MessagingCenter.Send<Page_SettingsViewModel, bool>(this, "UpdateNotifcationsForSpecialEvents", _notifcationsForSpecialEvents);
                 AudioController.PlayClick();
+                Analytics.TrackEvent("Toggle Push Notifcation", new Dictionary<string, string>
+                {
+                    { "What Notifcation", "SpecialEvents" },
+                    { "Enabled?", _notifcationsForSpecialEvents.ToString()}
+                });
             }
         }
         public bool NotifcationsForSpecialOffers
@@ -79,6 +95,11 @@ namespace MobileApp.ViewModels
                 Preferences.Set("SpecialOffers", _notifcationsForSpecialOffers);
                 MessagingCenter.Send<Page_SettingsViewModel, bool>(this, "UpdateNotifcationsForSpecialOffers", _notifcationsForSpecialOffers);
                 AudioController.PlayClick();
+                Analytics.TrackEvent("Toggle Push Notifcation", new Dictionary<string, string>
+                {
+                    { "What Notifcation", "SpecialOffers" },
+                    { "Enabled?", _notifcationsForSpecialOffers.ToString()}
+                });
             }
         }
         public bool ApplicationSounds
@@ -90,6 +111,10 @@ namespace MobileApp.ViewModels
                 Preferences.Set("AppSounds", _applicationSounds);
                 OnPropertyChanged();
                 AudioController.PlayClick();
+                Analytics.TrackEvent("Toggle Click Sound", new Dictionary<string, string>
+                {                    
+                    { "Enabled?", _notifcationsForSpecialOffers.ToString()}
+                });
             }
         }
 
@@ -110,11 +135,12 @@ namespace MobileApp.ViewModels
 
         private async void OpenEmail()
         {
+            Analytics.TrackEvent("Contact WAPL - Email");            
             await SendEmail();
         }
 
         public async Task SendEmail()
-        {
+        {            
             try
             {
                 var message = new EmailMessage();
@@ -131,6 +157,7 @@ namespace MobileApp.ViewModels
 
         private void OpenCall()
         {
+            Analytics.TrackEvent("Contact WAPL - Call");
             try
             {
                 PhoneDialer.Open("+61413155193");

@@ -1,4 +1,5 @@
-﻿using MobileApp.Pages.Popups;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -165,12 +166,24 @@ namespace MobileApp.ViewModels
         private async void OpenImage(Data_Image img)
         {    
             //await Navigation.PushPopupAsync(img);    
-            await PopupNavigation.Instance.PushAsync(new Popup_Image(img));             
+            await PopupNavigation.Instance.PushAsync(new Popup_Image(img));
+            Analytics.TrackEvent("Image Opened", new Dictionary<string, string>
+            {
+                {"Image Path", img.ImagePath},
+                {"Tournament ID", CurrentTournament.tourny.TournamentID.ToString() },
+                {"Tournament Venue", CurrentTournament.tourny.VenueName }
+            });
         }
 
         private async void ResultClicked(Data_Player result)
         {
             await _navigation.PushAsync(new Page_PlayerProfile(result));
+            Analytics.TrackEvent("Viewed Player Profile", new Dictionary<string, string>
+            {
+                {"Player Name", result.FullName },
+                {"Player ID", result.PlayerID.ToString() },
+                {"Season", "N/A" }
+            });
             await PopupNavigation.Instance.PopAsync();
         }
 

@@ -1,4 +1,5 @@
-﻿using MobileApp.Pages.Popups;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -45,16 +46,25 @@ namespace MobileApp.ViewModels
             switch (name)
             {
                 case "facebook":
-                    await Launcher.TryOpenAsync(new Uri("https://www.facebook.com/WAPokerLeague/"));
+                    await Launcher.TryOpenAsync(new Uri("https://www.facebook.com/WAPokerLeague/"));                    
+                    Analytics.TrackEvent("Social Clicked", new Dictionary<string, string>
+                    {{ "What Social", "Facebook" }});
+
                     break;
                 case "youtube":
                     await Launcher.TryOpenAsync(new Uri("https://www.youtube.com/user/WAPokerLeague"));
+                    Analytics.TrackEvent("Social Clicked", new Dictionary<string, string>
+                    {{ "What Social", "Youtube" }});
                     break;
                 case "twitch":
                     await Launcher.TryOpenAsync(new Uri("https://www.twitch.tv/wapokerleague"));
+                    Analytics.TrackEvent("Social Clicked", new Dictionary<string, string>
+                    {{ "What Social", "Twitch" }});
                     break;
                 case "website":
                     await Launcher.TryOpenAsync(new Uri("http://www.wapokerleague.com.au/"));
+                    Analytics.TrackEvent("Social Clicked", new Dictionary<string, string>
+                    {{ "What Social", "WAPL Website" }});
                     break;
             }
         }

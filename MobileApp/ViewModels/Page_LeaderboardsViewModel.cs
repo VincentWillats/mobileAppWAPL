@@ -1,4 +1,5 @@
-﻿using MobileApp.Pages.Popups;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -110,10 +111,16 @@ namespace MobileApp.ViewModels
             LeaderboardLoading = false;
         }
 
-        private async void LoadPlayerProfile(object player, int seasonID)
+        private async void LoadPlayerProfile(Data_Player player, int seasonID)
         {
             AudioController.PlayClick();
             await _navigation.PushAsync(new Page_PlayerProfile(player, seasonID));
+            Analytics.TrackEvent("Viewed Player Profile", new Dictionary<string, string>
+            {
+                {"Player Name", player.FullName },
+                {"Player ID", player.PlayerID.ToString() },
+                {"Season", seasonID.ToString() }  
+            });
         }
 
         private async void LoadSeasonList()

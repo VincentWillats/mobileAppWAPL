@@ -1,4 +1,5 @@
-﻿using MobileApp.Pages.Popups;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -88,6 +89,12 @@ namespace MobileApp.ViewModels
             if (_pageLoading) { return; }
             _pageLoading = true;
             await _navigation.PushAsync(new Page_PlayerProfile(playerObj));
+            Analytics.TrackEvent("Viewed Player Profile", new Dictionary<string, string>
+            {
+                {"Player Name", playerObj.FullName },
+                {"Player ID", playerObj.PlayerID.ToString() },
+                {"Season", "N/A" }
+            });
             _pageLoading = false;
         }
 
