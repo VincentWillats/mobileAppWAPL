@@ -78,7 +78,6 @@ namespace MobileApp.ViewModels
                     OnPropertyChanged();                    
                     LoadPlayerStats(_player.PlayerID, _seasonPicked);
                 }
-
             }
         }
 
@@ -170,8 +169,8 @@ namespace MobileApp.ViewModels
             StatsToShow.Add(new Data_Stat("Final Table Win Percent", PlayerStats.FinalTable_Win_PCT_Str));
             if (PlayerStats.FinalTable_Win_PCT_In_TopPCT < in_this_PCT_to_Show)
             {
-                StatsToShow.Add(new Data_Stat("Total Final Tables Rank", PlayerStats.FinalTable_Win_PCT_RankNo.ToString()));
-                StatsToShow.Add(new Data_Stat("Total Final Tables in top", PlayerStats.FinalTable_Win_PCT_In_TopPCT_Str + " of Players"));
+                StatsToShow.Add(new Data_Stat("Final Table Win Percent Rank", PlayerStats.FinalTable_Win_PCT_RankNo.ToString()));
+                StatsToShow.Add(new Data_Stat("Final Table Win Percent in top", PlayerStats.FinalTable_Win_PCT_In_TopPCT_Str + " of Players"));
             }
             //if (PlayerStats.Avg_Pct_Field_Beaten < ?????
             //{

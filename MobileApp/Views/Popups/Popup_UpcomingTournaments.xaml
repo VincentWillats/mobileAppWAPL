@@ -67,8 +67,8 @@
                    HorizontalTextAlignment="Center"/>
 
                 <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Gold"/>
-                <ScrollView Grid.Row="4" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                
+                    <Grid Grid.Row="4" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -102,8 +102,7 @@
                            Text="{Binding UpcomingTournament.Address04}"
                            TextColor="Gold"
                            FontSize="14"/>
-                </Grid>
-                </ScrollView>
+                </Grid>                
                 <ContentView Content="{Binding Map01}
                         " Grid.Row="4" Grid.Column="1"/>
             </Grid>

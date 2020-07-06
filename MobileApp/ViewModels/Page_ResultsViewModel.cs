@@ -1,4 +1,5 @@
-﻿using MobileApp.Pages.Popups;
+﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -86,7 +87,16 @@ namespace MobileApp.ViewModels
             if (pageLoading) { return; }  
             pageLoading = true;
             AudioController.PlayClick();
-            await _navigation.PushPopupAsync(new Popup_Result(result));            
+            await _navigation.PushPopupAsync(new Popup_Result(result));
+            Analytics.TrackEvent("Viewed Tournament Result", new Dictionary<string, string>
+            {
+                {"Tournament Date", result.tourny.RegoDate.Date.ToShortDateString()},
+                {"Tournament ID", result.tourny.TournamentID.ToString() },
+                {"Tournament Venue", result.tourny.VenueName },
+                {"Tournament Buyin", result.tourny.Buyin.ToString() },
+                {"Winner Name", result.winner.FullName },
+                {"Winner ID", result.winner.PlayerID.ToString() },
+            });
             pageLoading = false;                    
         }
 
