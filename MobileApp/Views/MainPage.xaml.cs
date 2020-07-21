@@ -32,7 +32,7 @@ namespace MobileApp
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel(this.Navigation);
+            BindingContext = new MainPageViewModel();
         }      
     }
 }

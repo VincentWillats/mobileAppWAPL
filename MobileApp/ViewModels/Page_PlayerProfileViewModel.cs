@@ -23,7 +23,6 @@ namespace MobileApp.ViewModels
 {
     class Page_PlayerProfileViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int _seasonPicked = -1;
@@ -84,9 +83,8 @@ namespace MobileApp.ViewModels
         public Command SwipedBackCommand { get; }
 
 
-        public Page_PlayerProfileViewModel(INavigation navigation, object playerObj)
+        public Page_PlayerProfileViewModel(object playerObj)
         {
-            _navigation = navigation;
             //firstLoad = true;
             _player = (Data_Player)playerObj;
             StatsToShow = new ObservableCollection<Data_Stat>();            
@@ -97,9 +95,8 @@ namespace MobileApp.ViewModels
             SwipedBackCommand = new Command(SwipedBack);
         }
 
-        public Page_PlayerProfileViewModel(INavigation navigation, object playerObj, int seasonID)
+        public Page_PlayerProfileViewModel(object playerObj, int seasonID)
         {
-            _navigation = navigation;
             _player = (Data_Player)playerObj;            
             StatsToShow = new ObservableCollection<Data_Stat>();
             _seasonPicked = seasonID;
@@ -180,7 +177,7 @@ namespace MobileApp.ViewModels
 
         private void SwipedBack()
         {
-            _navigation.PopAsync();
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

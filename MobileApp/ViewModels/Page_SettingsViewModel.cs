@@ -25,7 +25,6 @@ namespace MobileApp.ViewModels
 {
     public class Page_SettingsViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _notifcationsForUpcomingTournaments;
@@ -123,9 +122,8 @@ namespace MobileApp.ViewModels
         public Command CallCommand { get; }
         
         
-        public Page_SettingsViewModel(INavigation navigation)
-        {            
-            _navigation = navigation;
+        public Page_SettingsViewModel()
+        {           
             SwipedBackCommand = new Command(SwipedBack);
             EmailCommand = new Command(OpenEmail);
             CallCommand = new Command(OpenCall);
@@ -179,7 +177,7 @@ namespace MobileApp.ViewModels
 
         private void SwipedBack()
         {
-            _navigation.PopAsync();
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

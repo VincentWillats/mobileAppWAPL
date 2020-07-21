@@ -22,7 +22,7 @@ namespace MobileApp.Pages.Popups
     {        
         public Popup_Result(object selectedItem)
         {
-            BindingContext = new Popup_ResultViewModel(this.Navigation, selectedItem);
+            BindingContext = new Popup_ResultViewModel(selectedItem);
             InitializeComponent();     
         }           
     }

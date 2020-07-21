@@ -25,7 +25,6 @@ namespace MobileApp.ViewModels
 {
     class Popup_ResultViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
         private Data_Result _currentTournament;
         private bool _imageLoading;
@@ -119,9 +118,8 @@ namespace MobileApp.ViewModels
 
         public ObservableCollection<Data_Image> ImageList { get; private set; }
 
-        public Popup_ResultViewModel(INavigation navigation, object selectedItem)
+        public Popup_ResultViewModel(object selectedItem)
         {
-            _navigation = navigation;
             CurrentTournament = (Data_Result)selectedItem;
             ImageList = new ObservableCollection<Data_Image>();
             ResultPlayerList = new ObservableCollection<Data_ResultDetailPlayer>();
@@ -165,7 +163,6 @@ namespace MobileApp.ViewModels
 
         private async void OpenImage(Data_Image img)
         {    
-            //await Navigation.PushPopupAsync(img);    
             await PopupNavigation.Instance.PushAsync(new Popup_Image(img));
             Analytics.TrackEvent("Image Opened", new Dictionary<string, string>
             {
@@ -177,7 +174,7 @@ namespace MobileApp.ViewModels
 
         private async void ResultClicked(Data_Player result)
         {
-            await _navigation.PushAsync(new Page_PlayerProfile(result));
+            await Application.Current.MainPage.Navigation.PushAsync(new Page_PlayerProfile(result));
             Analytics.TrackEvent("Viewed Player Profile", new Dictionary<string, string>
             {
                 {"Player Name", result.FullName },

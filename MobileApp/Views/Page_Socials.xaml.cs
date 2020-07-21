@@ -10,7 +10,7 @@ namespace MobileApp
         public Page_Socials()
         {
             InitializeComponent();
-            BindingContext = new Page_SocialsViewModel(this.Navigation);
+            BindingContext = new Page_SocialsViewModel();
         }
     }
 }

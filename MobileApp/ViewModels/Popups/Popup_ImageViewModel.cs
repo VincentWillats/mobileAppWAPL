@@ -20,7 +20,6 @@ namespace MobileApp.ViewModels
 {
     class Popup_ImageViewModel : INotifyPropertyChanged
     {
-       // private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Command ClosePopupCommand { get; }

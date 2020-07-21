@@ -16,7 +16,7 @@ namespace MobileApp
         public Page_UpcomingTournaments()
         {
             InitializeComponent();
-            BindingContext = new Page_UpcomingTournamentsViewModel(this.Navigation);
+            BindingContext = new Page_UpcomingTournamentsViewModel();
         }           
     }
 }

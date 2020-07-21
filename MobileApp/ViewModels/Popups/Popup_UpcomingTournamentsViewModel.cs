@@ -27,7 +27,6 @@ namespace MobileApp.ViewModels
 {
     class Popup_UpcomingTournamentsViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
         private Xamarin.Forms.Maps.Map _map01 = new Xamarin.Forms.Maps.Map();
         private Pin _pin01;
@@ -58,7 +57,6 @@ namespace MobileApp.ViewModels
 
         public Popup_UpcomingTournamentsViewModel(INavigation navigation, object selectedItem)
         {
-            _navigation = navigation;
             UpcomingTournament = (Data_Tournament)selectedItem;
             SetMap();
             SwipedBackCommand = new Command(SwipedBack);
