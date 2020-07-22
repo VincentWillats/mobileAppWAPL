@@ -27,7 +27,7 @@ namespace MobileApp
         public Page_PlayerSearch()
         {
             InitializeComponent();
-            BindingContext = new Page_PlayerSearchViewModel(this.Navigation);
+            BindingContext = new Page_PlayerSearchViewModel();
         }
     }
 }

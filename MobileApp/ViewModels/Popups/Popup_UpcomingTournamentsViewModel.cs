@@ -27,12 +27,29 @@ namespace MobileApp.ViewModels
 {
     class Popup_UpcomingTournamentsViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
         private Xamarin.Forms.Maps.Map _map01 = new Xamarin.Forms.Maps.Map();
         private Pin _pin01;
         private MapSpan _mapSpan01;
         private Data_Tournament _upcomingTournament;
+
+        private int tournyID;
+
+        public int TournyID
+        {
+            get { return tournyID; }
+            set 
+            { 
+                tournyID = value;
+                LoadTournamentDetails();    
+            }
+        }
+
+        private async void LoadTournamentDetails()
+        {
+            UpcomingTournament = await LoadTournyAsync(tournyID);
+            SetMap();
+        }
 
         public Xamarin.Forms.Maps.Map Map01
         {
@@ -56,13 +73,24 @@ namespace MobileApp.ViewModels
 
         public Command SwipedBackCommand { get; }
 
-        public Popup_UpcomingTournamentsViewModel(INavigation navigation, object selectedItem)
+        public Popup_UpcomingTournamentsViewModel(object selectedItem)
         {
-            _navigation = navigation;
             UpcomingTournament = (Data_Tournament)selectedItem;
             SetMap();
             SwipedBackCommand = new Command(SwipedBack);
         }
+
+        public Popup_UpcomingTournamentsViewModel(string tournyID)
+        {
+            TournyID = int.Parse(tournyID);
+            SwipedBackCommand = new Command(SwipedBack);
+        }
+
+        private async Task<Data_Tournament> LoadTournyAsync(int tournID)
+        {
+            return await Controller_SQL.LoadUpcomingTournamentDetailsAsync(tournID);
+        }
+        
 
         private async void SetMap()
         {

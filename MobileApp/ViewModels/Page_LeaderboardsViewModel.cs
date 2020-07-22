@@ -23,7 +23,6 @@ namespace MobileApp.ViewModels
 {
     class Page_LeaderboardsViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
         private bool firstLoad = true;
 
@@ -88,9 +87,8 @@ namespace MobileApp.ViewModels
 
         public ObservableCollection<Data_LeaderboardEntry> LeaderboardEntries { get; private set; }
 
-        public Page_LeaderboardsViewModel(INavigation navigation)
-        {            
-            _navigation = navigation;
+        public Page_LeaderboardsViewModel()
+        {   
             SwipedBackCommand = new Command(SwipedBack);
             LeaderboardEntries = new ObservableCollection<Data_LeaderboardEntry>();
             LoadSeasonList();
@@ -114,7 +112,7 @@ namespace MobileApp.ViewModels
         private async void LoadPlayerProfile(Data_Player player, int seasonID)
         {
             AudioController.PlayClick();
-            await _navigation.PushAsync(new Page_PlayerProfile(player, seasonID));
+            await Application.Current.MainPage.Navigation.PushAsync(new Page_PlayerProfile(player, seasonID));
             Analytics.TrackEvent("Viewed Player Profile", new Dictionary<string, string>
             {
                 {"Player Name", player.FullName },
@@ -132,7 +130,7 @@ namespace MobileApp.ViewModels
 
         private void SwipedBack()
         {
-            _navigation.PopAsync();
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

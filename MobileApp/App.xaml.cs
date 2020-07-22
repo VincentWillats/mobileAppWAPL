@@ -8,13 +8,12 @@ using Microsoft.AppCenter.Crashes;
 namespace MobileApp
 {
     public partial class App : Application
-    {
+    {      
         public App()
-        {
+        { 
             InitializeComponent();
-
+            Xamarin.Essentials.VersionTracking.Track();
             MainPage = new NavigationPage(new MainPage());
-
         }
 
         protected override void OnStart()
@@ -22,7 +21,7 @@ namespace MobileApp
             AppCenter.Start(Keys.Keys._AndroidSecret +
                   "uwp={Your UWP App secret here};" +
                   "ios={Your iOS App secret here}",
-                  typeof(Analytics), typeof(Crashes));
+                  typeof(Analytics), typeof(Crashes));            
         }
 
         protected override void OnSleep()

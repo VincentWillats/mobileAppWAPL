@@ -23,7 +23,6 @@ namespace MobileApp.ViewModels
 {
     class Page_PlayerSearchViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _pageLoading = false;
@@ -77,9 +76,8 @@ namespace MobileApp.ViewModels
 
         public ObservableCollection<Data_Player> Players { get; private set; }
 
-        public Page_PlayerSearchViewModel(INavigation navigation)
-        {            
-            _navigation = navigation;
+        public Page_PlayerSearchViewModel()
+        {    
             SwipedBackCommand = new Command(SwipedBack);
             Players = new ObservableCollection<Data_Player>();
         } 
@@ -88,7 +86,7 @@ namespace MobileApp.ViewModels
         {
             if (_pageLoading) { return; }
             _pageLoading = true;
-            await _navigation.PushAsync(new Page_PlayerProfile(playerObj));
+            await Application.Current.MainPage.Navigation.PushAsync(new Page_PlayerProfile(playerObj));
             Analytics.TrackEvent("Viewed Player Profile", new Dictionary<string, string>
             {
                 {"Player Name", playerObj.FullName },
@@ -115,7 +113,7 @@ namespace MobileApp.ViewModels
 
         private void SwipedBack()
         {
-            _navigation.PopAsync();
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

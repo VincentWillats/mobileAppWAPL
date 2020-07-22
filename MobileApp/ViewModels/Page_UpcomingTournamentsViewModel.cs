@@ -23,9 +23,7 @@ namespace MobileApp.ViewModels
 {
     class Page_UpcomingTournamentsViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
-
         private bool pageLoading = false;
         private bool _tournamentsLoading;
         private bool _noUpcomingTournaments;
@@ -73,9 +71,8 @@ namespace MobileApp.ViewModels
 
         public ObservableCollection<Data_Tournament> UpcomingTournaments { get; private set; }
 
-        public Page_UpcomingTournamentsViewModel(INavigation navigation)
+        public Page_UpcomingTournamentsViewModel()
         {            
-            _navigation = navigation;
             SwipedBackCommand = new Command(SwipedBack);
             UpcomingTournaments = new ObservableCollection<Data_Tournament>();
             LoadUpcomingTournaments();
@@ -106,7 +103,7 @@ namespace MobileApp.ViewModels
         {
             pageLoading = true;
             AudioController.PlayClick();
-            await _navigation.PushPopupAsync(new Popup_UpcomingTournaments(tourny));
+            await Application.Current.MainPage.Navigation.PushPopupAsync(new Popup_UpcomingTournaments(tourny));
             Analytics.TrackEvent("Viewed Tournament", new Dictionary<string, string>
                     {
                         {"Tournament Date", tourny.RegoDate.Date.ToShortDateString()}, 
@@ -119,7 +116,7 @@ namespace MobileApp.ViewModels
 
         private void SwipedBack()
         {
-            _navigation.PopAsync();
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

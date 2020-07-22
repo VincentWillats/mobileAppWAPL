@@ -53,6 +53,48 @@ namespace MobileApp
             return upcomingTournamentList;
         }
 
+        public static async Task<Data_Tournament> LoadUpcomingTournamentDetailsAsync(int tournyID)
+        {
+            string funcName = "GetUpcomingTournamentDetails";
+            Data_Tournament upcomingTournament = new Data_Tournament();
+            try
+            {
+                var stringToSearch = new StringContent(tournyID.ToString());
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, stringToSearch);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                upcomingTournament = JsonConvert.DeserializeObject<Data_Tournament>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
+
+            return upcomingTournament;
+        }
+
+        public static async Task<Data_Result> LoadTournamentResultsAsync(int tournyID)
+        {
+            string funcName = "GetResultDetails";
+            Data_Result tournamentResults = new Data_Result();
+            try
+            {
+                var stringToSearch = new StringContent(tournyID.ToString());
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, stringToSearch);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                tournamentResults = JsonConvert.DeserializeObject<Data_Result>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
+            return tournamentResults;
+        }
+
+
         public static async Task<List<Data_Result>> LoadResultsAsync()
         {
             string funcName = "GetResultsGeneral";

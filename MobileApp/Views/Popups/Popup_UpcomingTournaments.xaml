@@ -26,7 +26,7 @@
             <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
             <TapGestureRecognizer Command="{Binding SwipedBackCommand}"/>
         </StackLayout.GestureRecognizers>
-        <Frame HorizontalOptions="Center" CornerRadius="5" VerticalOptions="CenterAndExpand" BorderColor="Gold" BackgroundColor="Black" Padding="6" >
+        <Frame HorizontalOptions="Center" CornerRadius="5" VerticalOptions="CenterAndExpand" BorderColor="Gold" BackgroundColor="Black" Padding="6" Margin="20,0,20,0" >
             <Frame.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipedBackCommand}"/>
                 <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipedBackCommand}"/>
@@ -37,7 +37,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="16.1*"/>
                     <RowDefinition Height="0.5*"/>
-                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -103,8 +103,7 @@
                            TextColor="Gold"
                            FontSize="14"/>
                 </Grid>                
-                <ContentView Content="{Binding Map01}
-                        " Grid.Row="4" Grid.Column="1"/>
+                <ContentView Content="{Binding Map01}" Grid.Row="4" Grid.Column="1"/>
             </Grid>
         </Frame>
     </StackLayout>

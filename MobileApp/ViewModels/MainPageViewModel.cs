@@ -1,5 +1,7 @@
 ﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using MobileApp.Views;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,18 +23,14 @@ namespace MobileApp.ViewModels
 {
     class MainPageViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Command PageClickCommand { get; }
         public Command SettingsClickCommand { get; }
 
         bool pageLoading = false;
-
-
-        public MainPageViewModel(INavigation navigation)
+        public MainPageViewModel()
         {
-            _navigation = navigation;
             PageClickCommand = new Command<Label>(async (x) => await OpenPage(x));
             SettingsClickCommand = new Command<Image>(async (x) => await OpenSettings(x));
 
@@ -44,6 +42,8 @@ namespace MobileApp.ViewModels
             //    });
             //});
         }
+       
+
         private async Task OpenSettings(Image whatImage)
         {
             AudioController.PlayClick();
@@ -53,9 +53,9 @@ namespace MobileApp.ViewModels
             switch (whatPage)
             {
                 case "settings":
-                    await _navigation.PushAsync(new Page_Settings());
+                    await Application.Current.MainPage.Navigation.PushAsync(new Page_Settings());
                     Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
-                    {{ "What Page", "Settings" }});
+                                         {{ "What Page", "Settings" }});
                     break;
             }
             pageLoading = false;
@@ -73,31 +73,31 @@ namespace MobileApp.ViewModels
                 case "upcomingTournaments":
                     Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
                     {{ "What Page", "UpcomingTournaments" }});
-                    await _navigation.PushAsync(new Page_UpcomingTournaments());
+                    await Application.Current.MainPage.Navigation.PushAsync(new Page_UpcomingTournaments());
                     
                     break;
                 case "leaderboards":
                     Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
                     {{ "What Page", "Leaderboards" }});
-                    await _navigation.PushAsync(new Page_Leaderboards());
+                    await Application.Current.MainPage.Navigation.PushAsync(new Page_Leaderboards());     
                     
                     break;
                 case "results":
                     Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
                     {{ "What Page", "Results" }});
-                    await _navigation.PushAsync(new Page_Results());
+                    await Application.Current.MainPage.Navigation.PushAsync(new Page_Results());
                     
                     break;
                 case "playerSearch":
                     Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
                     {{ "What Page", "PlayerSearch" }});
-                    await _navigation.PushAsync(new Page_PlayerSearch());
+                    await Application.Current.MainPage.Navigation.PushAsync(new Page_PlayerSearch());
                    
                     break;
                 case "socials":
                     Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
                     {{ "What Page", "Socials" }});
-                    await _navigation.PushAsync(new Page_Socials());
+                    await Application.Current.MainPage.Navigation.PushAsync(new Page_Socials());
                     
                     break;
             }

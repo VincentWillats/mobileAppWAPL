@@ -24,16 +24,14 @@ namespace MobileApp.ViewModels
 {
     class Page_SocialsViewModel : INotifyPropertyChanged
     {
-        private INavigation _navigation;
         public event PropertyChangedEventHandler PropertyChanged;
         
         public Command SwipedBackCommand { get; }
         public Command SocialClickedCommand { get; }
         
         
-        public Page_SocialsViewModel(INavigation navigation)
+        public Page_SocialsViewModel()
         {            
-            _navigation = navigation;
             SwipedBackCommand = new Command(SwipedBack);
             SocialClickedCommand = new Command<Image>(async (x) => await SocialClicked(x));
         }
@@ -72,7 +70,7 @@ namespace MobileApp.ViewModels
 
         private void SwipedBack()
         {
-            _navigation.PopAsync();
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

@@ -18,7 +18,13 @@ namespace MobileApp.Pages.Popups
         public Popup_UpcomingTournaments(object selectedItem)
         {           
             InitializeComponent();
-            BindingContext = new Popup_UpcomingTournamentsViewModel(this.Navigation, selectedItem);     
+            BindingContext = new Popup_UpcomingTournamentsViewModel(selectedItem);     
+        }
+
+        public Popup_UpcomingTournaments(string tournyID)
+        {
+            InitializeComponent();            
+            BindingContext = new Popup_UpcomingTournamentsViewModel(tournyID);
         }
     }
 }

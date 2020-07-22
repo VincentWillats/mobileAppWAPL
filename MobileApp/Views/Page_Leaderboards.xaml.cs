@@ -15,7 +15,7 @@ namespace MobileApp
         public Page_Leaderboards()
         {                        
             InitializeComponent();
-            BindingContext = new Page_LeaderboardsViewModel(this.Navigation);
+            BindingContext = new Page_LeaderboardsViewModel();
         }    
     }
 }

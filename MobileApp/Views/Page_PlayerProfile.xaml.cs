@@ -15,13 +15,13 @@ namespace MobileApp
         public Page_PlayerProfile(object playerObj)
         {      
             InitializeComponent();
-            BindingContext = new Page_PlayerProfileViewModel(this.Navigation, playerObj);
+            BindingContext = new Page_PlayerProfileViewModel(playerObj);
 
         }
         public Page_PlayerProfile(object playerObj, int _seasonID)
         {     
             InitializeComponent();
-            BindingContext = new Page_PlayerProfileViewModel(this.Navigation, playerObj, _seasonID);
+            BindingContext = new Page_PlayerProfileViewModel(playerObj, _seasonID);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MobileApp
         public Page_Results()
         {
             InitializeComponent();
-            BindingContext = new Page_ResultsViewModel(this.Navigation);
+            BindingContext = new Page_ResultsViewModel();
         }
 
     }

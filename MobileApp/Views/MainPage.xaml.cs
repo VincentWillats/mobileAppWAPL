@@ -28,11 +28,11 @@ namespace MobileApp
 {
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
-    {
+    {   
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel(this.Navigation);
-        }      
+            BindingContext = new MainPageViewModel();
+        }  
     }
 }

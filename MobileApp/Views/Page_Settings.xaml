@@ -130,6 +130,10 @@
                     </StackLayout>
                 </Grid>
             </Grid>
+            <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="End" VerticalOptions="End">
+                <Label Text="Application Version: " TextColor="Gold" HorizontalOptions="End" VerticalOptions="End" FontSize="10"/>
+                <Label Text="{Binding AppVersion}" TextColor="Gold" HorizontalOptions="End" VerticalOptions="End" FontSize="10"/>
+            </StackLayout>
         </Grid>
     </ScrollView>    
 </ContentPage>

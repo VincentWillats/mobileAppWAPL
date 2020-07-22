@@ -15,7 +15,7 @@ namespace MobileApp.Views
         public Page_Settings()
         {
             InitializeComponent();
-            BindingContext = new Page_SettingsViewModel(this.Navigation);
+            BindingContext = new Page_SettingsViewModel();
         }
     }
 }
