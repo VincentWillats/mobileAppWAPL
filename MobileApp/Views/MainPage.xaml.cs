@@ -33,6 +33,12 @@ namespace MobileApp
         {
             InitializeComponent();
             BindingContext = new MainPageViewModel();
-        }      
+        }
+
+        public MainPage(string tournyID)
+        {
+            InitializeComponent();
+            BindingContext = new MainPageViewModel(tournyID);           
+        }
     }
 }

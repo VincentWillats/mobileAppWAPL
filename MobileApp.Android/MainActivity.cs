@@ -9,6 +9,7 @@ using Android.OS;
 using FormsToolkit.Droid;
 using Android.Gms.Common;
 using Android.Graphics;
+using Android.Content;
 
 namespace MobileApp.Droid
 {
@@ -27,7 +28,7 @@ namespace MobileApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Toolkit.Init();
-            LoadApplication(new App());
+            LoadApplication(new App(false));
             Window.SetStatusBarColor(Color.Black);
 
             if (IsPlayServiceAvailable() == false)
@@ -59,16 +60,25 @@ namespace MobileApp.Droid
         }
 
 
-        //protected override void OnNewIntent(Intent intent)
-        //{
-        //    if (intent.Extras != null)
-        //    {
-        //        var message = intent.GetStringExtra("message");
-        //        (App.Current.MainPage as MainPage)?.AddMessage(message);
-        //    }
+        protected override void OnNewIntent(Intent intent)
+        {
+            if (intent.Extras != null)
+            {
+                string tournyID = Intent.GetStringExtra("tournyID");
+                if (tournyID == null)
+                {
+                    LoadApplication(new App(false));
+                }
+                else
+                {
+                    App.tournyID = tournyID;
+                    LoadApplication(new App(true));
+                }
 
-        //    base.OnNewIntent(intent);
-        //}
+            }
+
+            base.OnNewIntent(intent);
+        }
 
         bool IsPlayServiceAvailable()
         {

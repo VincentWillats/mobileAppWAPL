@@ -53,6 +53,27 @@ namespace MobileApp
             return upcomingTournamentList;
         }
 
+        public static async Task<Data_Tournament> LoadUpcomingTournamentDetailsAsync(int tournyID)
+        {
+            string funcName = "GetUpcomingTournamentDetails";
+            Data_Tournament upcomingTournament = new Data_Tournament();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                upcomingTournament = JsonConvert.DeserializeObject<Data_Tournament>(responseBody);
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine(ea.Message);
+            }
+
+            return upcomingTournament;
+        }
+
+
         public static async Task<List<Data_Result>> LoadResultsAsync()
         {
             string funcName = "GetResultsGeneral";

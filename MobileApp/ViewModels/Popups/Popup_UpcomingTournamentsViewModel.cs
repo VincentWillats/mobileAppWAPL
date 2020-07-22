@@ -33,6 +33,24 @@ namespace MobileApp.ViewModels
         private MapSpan _mapSpan01;
         private Data_Tournament _upcomingTournament;
 
+        private int tournyID;
+
+        public int TournyID
+        {
+            get { return tournyID; }
+            set 
+            { 
+                tournyID = value;
+                LoadTournamentDetails();    
+            }
+        }
+
+        private async void LoadTournamentDetails()
+        {
+            UpcomingTournament = await LoadTournyAsync(tournyID);
+            SetMap();
+        }
+
         public Xamarin.Forms.Maps.Map Map01
         {
             get { return _map01; }
@@ -55,12 +73,23 @@ namespace MobileApp.ViewModels
 
         public Command SwipedBackCommand { get; }
 
-        public Popup_UpcomingTournamentsViewModel(INavigation navigation, object selectedItem)
+        public Popup_UpcomingTournamentsViewModel(object selectedItem)
         {
             UpcomingTournament = (Data_Tournament)selectedItem;
             SetMap();
             SwipedBackCommand = new Command(SwipedBack);
         }
+
+        public Popup_UpcomingTournamentsViewModel(int _tournyID)
+        {                        
+            SwipedBackCommand = new Command(SwipedBack);
+        }
+
+        private async Task<Data_Tournament> LoadTournyAsync(int tournID)
+        {
+            return await Controller_SQL.LoadUpcomingTournamentDetailsAsync(tournID);
+        }
+        
 
         private async void SetMap()
         {

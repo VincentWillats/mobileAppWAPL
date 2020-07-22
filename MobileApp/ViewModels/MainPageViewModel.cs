@@ -1,5 +1,7 @@
 ﻿using Microsoft.AppCenter.Analytics;
+using MobileApp.Pages.Popups;
 using MobileApp.Views;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,7 +29,7 @@ namespace MobileApp.ViewModels
         public Command SettingsClickCommand { get; }
 
         bool pageLoading = false;
-
+        private string tournyID;
 
         public MainPageViewModel()
         {
@@ -42,6 +44,17 @@ namespace MobileApp.ViewModels
             //    });
             //});
         }
+
+        public MainPageViewModel(string tournyID)
+        {
+            OpenUpcomingTournament(tournyID);
+        }
+
+        private async void OpenUpcomingTournament(string tID)
+        {
+           await Application.Current.MainPage.Navigation.PushPopupAsync(new Popup_UpcomingTournaments(tID));
+        }
+
         private async Task OpenSettings(Image whatImage)
         {
             AudioController.PlayClick();

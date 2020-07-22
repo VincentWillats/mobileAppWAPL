@@ -113,9 +113,9 @@
     <Compile Include="Resources\Resource.designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <GoogleServicesJson Include="google-services.json" />
     <ProguardConfiguration Include="proguard.cfg" />
     <None Include="Assets\AboutAssets.txt" />
+    <GoogleServicesJson Include="google-services.json" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

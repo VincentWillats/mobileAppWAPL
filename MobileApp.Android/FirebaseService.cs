@@ -38,7 +38,13 @@ namespace MobileApp.Droid
                                                                 "}";
         public static string NotificationHubName { get; set; } = Keys.Keys._NotificationHubName;
         public static string ListenConnectionString { get; set; } = Keys.Keys._ListenConnectionString;
-        public static string[] SubscriptionTags { get; set; } = { "UpcomingTournament" , "SpecialOffer", "SpecialEvent", "Result" };
+
+//#if DEBUG
+        public static string[] SubscriptionTags { get; set; } = { "UpcomingTournament", "SpecialOffer", "SpecialEvent", "Result", "Debug" };
+//#else
+//        public static string[] SubscriptionTags { get; set; } = { "UpcomingTournament" , "SpecialOffer", "SpecialEvent", "Result" };
+//#endif
+
 
         public static string DebugTag { get; set; } = "XamarinNotify";
 
@@ -102,8 +108,10 @@ namespace MobileApp.Droid
         void SendLocalNotification(IDictionary<string, string> data)
         {            
             var intent = new Intent(this, typeof(MainActivity));
+            intent.PutExtra("tournyID", 10773);
             var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
             //var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+
             if (Build.VERSION.SdkInt < BuildVersionCodes.O)
             {
                 // Notification channels are new in API 26 (and not a part of the
@@ -111,11 +119,7 @@ namespace MobileApp.Droid
                 // channel on older versions of Android.
                 return;
             }
-            BuildNotifications(data, intent, pendingIntent);
-        }
 
-        private void BuildNotifications(IDictionary<string, string> data, Intent intent, PendingIntent pendingIntent)
-        {
             string message = "";
             string channel = "";
             string title = "";
@@ -127,10 +131,10 @@ namespace MobileApp.Droid
             data.TryGetValue("title", out title);
             data.TryGetValue("image", out largeImg);
 
-            if(channel == "UpcomingTournament" && _notifcationsForUpcomingTournaments == false) { return; }
-            if(channel == "Result" && _notifcationsForResults == false) { return; }
-            if(channel == "SpecialOffer" && _notifcationsForSpecialOffers == false) { return; }
-            if(channel == "SpecialEvent" && _notifcationsForSpecialEvents == false) { return; }
+            if (channel == "UpcomingTournament" && _notifcationsForUpcomingTournaments == false) { return; }
+            if (channel == "Result" && _notifcationsForResults == false) { return; }
+            if (channel == "SpecialOffer" && _notifcationsForSpecialOffers == false) { return; }
+            if (channel == "SpecialEvent" && _notifcationsForSpecialEvents == false) { return; }
 
             if (!string.IsNullOrEmpty(largeImg))
             {
@@ -151,9 +155,14 @@ namespace MobileApp.Droid
                 .SetAutoCancel(true)
                 .SetShowWhen(false)
                 .SetLargeIcon(largeImgBitmap)
-                .SetContentIntent(pendingIntent);              
+                .SetContentIntent(pendingIntent);
             notificationManager.Notify(0, notificationBuilder.Build());
         }
+
+        //private void BuildNotifications(IDictionary<string, string> data, Intent intent, PendingIntent pendingIntent)
+        //{
+         
+        //}
 
         private Bitmap GetImageBitmapFromUrl(string url)
         {
