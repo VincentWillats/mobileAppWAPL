@@ -8,25 +8,11 @@ using Microsoft.AppCenter.Crashes;
 namespace MobileApp
 {
     public partial class App : Application
-    {
-        public static string tournyID;
-        public bool navigating;
-        public App(bool shallNavigate)
-        {
-            navigating = shallNavigate;
-
-            InitializeComponent();
-
-            if (navigating == false) // This condition for normar process and in else part is pushnotification process**
-            {
-                MainPage = new NavigationPage(new MainPage());// HomePage
-            }
-            else
-            {         
-                MainPage = new NavigationPage(new MainPage(tournyID));// HomePage
-
-            }
-            //MainPage = new NavigationPage(new MainPage());
+    {      
+        public App()
+        { 
+            InitializeComponent();           
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

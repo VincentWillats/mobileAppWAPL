@@ -23,9 +23,8 @@ namespace MobileApp.Pages.Popups
 
         public Popup_UpcomingTournaments(string tournyID)
         {
-            InitializeComponent();
-            int tournyInt = int.Parse(tournyID);
-            BindingContext = new Popup_UpcomingTournamentsViewModel(tournyInt);
+            InitializeComponent();            
+            BindingContext = new Popup_UpcomingTournamentsViewModel(tournyID);
         }
     }
 }

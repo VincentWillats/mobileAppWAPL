@@ -80,8 +80,9 @@ namespace MobileApp.ViewModels
             SwipedBackCommand = new Command(SwipedBack);
         }
 
-        public Popup_UpcomingTournamentsViewModel(int _tournyID)
-        {                        
+        public Popup_UpcomingTournamentsViewModel(string tournyID)
+        {
+            TournyID = int.Parse(tournyID);
             SwipedBackCommand = new Command(SwipedBack);
         }
 

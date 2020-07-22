@@ -10,6 +10,10 @@ using FormsToolkit.Droid;
 using Android.Gms.Common;
 using Android.Graphics;
 using Android.Content;
+using MobileApp.Pages.Popups;
+using Rg.Plugins.Popup.Extensions;
+using System.Collections.Generic;
+using Microsoft.AppCenter.Analytics;
 
 namespace MobileApp.Droid
 {
@@ -28,7 +32,7 @@ namespace MobileApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Toolkit.Init();
-            LoadApplication(new App(false));
+            LoadApplication(new App());
             Window.SetStatusBarColor(Color.Black);
 
             if (IsPlayServiceAvailable() == false)
@@ -60,24 +64,47 @@ namespace MobileApp.Droid
         }
 
 
-        protected override void OnNewIntent(Intent intent)
+        protected override async void OnNewIntent(Intent intent)
         {
-            if (intent.Extras != null)
-            {
-                string tournyID = Intent.GetStringExtra("tournyID");
-                if (tournyID == null)
-                {
-                    LoadApplication(new App(false));
-                }
-                else
-                {
-                    App.tournyID = tournyID;
-                    LoadApplication(new App(true));
-                }
-
-            }
-
             base.OnNewIntent(intent);
+            LoadApplication(new App());
+            if (Intent.Extras != null)
+            {                
+                string popupType = Intent.GetStringExtra("popupType");
+                string tournyID = Intent.GetStringExtra("tournyID");
+                if(!string.IsNullOrWhiteSpace(popupType) || !string.IsNullOrWhiteSpace(tournyID))
+                {
+                    await Xamarin.Forms.Application.Current.MainPage.Navigation.PushPopupAsync(new Popup_UpcomingTournaments(tournyID));
+                }               
+            }   
+        }
+
+        protected override async void OnPostResume()
+        {
+            base.OnPostResume();
+            if (Intent.Extras != null)
+            {
+                string popupType = Intent.GetStringExtra("popupType");
+                string tournyID = Intent.GetStringExtra("tournyID");
+                if (!string.IsNullOrWhiteSpace(popupType) || !string.IsNullOrWhiteSpace(tournyID))
+                {
+                    switch (popupType)
+                    {
+                        case "upcomingTournament":
+                            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushPopupAsync(new Popup_UpcomingTournaments(tournyID));
+                            Analytics.TrackEvent("Notification Clicked!", new Dictionary<string, string>
+                                                            {{ "Type of Notification", "Upcoming Tournament" },
+                                                            { "Tournament ID", tournyID }});
+                            break;
+                        case "result":
+                            //OpenUpcomingTournament(tournyID);
+                            Analytics.TrackEvent("Notification Clicked!", new Dictionary<string, string>
+                                                            {{ "Type of Notification", "Tournament Result" },
+                                                            { "Tournament ID", tournyID }});
+                            break;
+                    }                    
+                }
+            }
         }
 
         bool IsPlayServiceAvailable()

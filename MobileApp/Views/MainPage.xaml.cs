@@ -28,17 +28,11 @@ namespace MobileApp
 {
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
-    {
+    {   
         public MainPage()
         {
             InitializeComponent();
             BindingContext = new MainPageViewModel();
-        }
-
-        public MainPage(string tournyID)
-        {
-            InitializeComponent();
-            BindingContext = new MainPageViewModel(tournyID);           
-        }
+        }  
     }
 }

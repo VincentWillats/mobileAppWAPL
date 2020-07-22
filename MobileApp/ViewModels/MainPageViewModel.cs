@@ -29,8 +29,6 @@ namespace MobileApp.ViewModels
         public Command SettingsClickCommand { get; }
 
         bool pageLoading = false;
-        private string tournyID;
-
         public MainPageViewModel()
         {
             PageClickCommand = new Command<Label>(async (x) => await OpenPage(x));
@@ -44,16 +42,7 @@ namespace MobileApp.ViewModels
             //    });
             //});
         }
-
-        public MainPageViewModel(string tournyID)
-        {
-            OpenUpcomingTournament(tournyID);
-        }
-
-        private async void OpenUpcomingTournament(string tID)
-        {
-           await Application.Current.MainPage.Navigation.PushPopupAsync(new Popup_UpcomingTournaments(tID));
-        }
+       
 
         private async Task OpenSettings(Image whatImage)
         {
@@ -66,7 +55,7 @@ namespace MobileApp.ViewModels
                 case "settings":
                     await Application.Current.MainPage.Navigation.PushAsync(new Page_Settings());
                     Analytics.TrackEvent("Viewed Page", new Dictionary<string, string>
-                    {{ "What Page", "Settings" }});
+                                         {{ "What Page", "Settings" }});
                     break;
             }
             pageLoading = false;

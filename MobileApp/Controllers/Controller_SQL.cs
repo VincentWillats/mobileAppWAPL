@@ -59,7 +59,8 @@ namespace MobileApp
             Data_Tournament upcomingTournament = new Data_Tournament();
             try
             {
-                HttpResponseMessage response = await client.GetAsync(webAppURL + funcName);
+                var stringToSearch = new StringContent(tournyID.ToString());
+                HttpResponseMessage response = await client.PostAsync(webAppURL + funcName, stringToSearch);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
 

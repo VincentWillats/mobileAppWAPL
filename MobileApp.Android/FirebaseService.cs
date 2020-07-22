@@ -106,12 +106,7 @@ namespace MobileApp.Droid
         }
 
         void SendLocalNotification(IDictionary<string, string> data)
-        {            
-            var intent = new Intent(this, typeof(MainActivity));
-            intent.PutExtra("tournyID", 10773);
-            var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
-            //var notificationManager = (NotificationManager)GetSystemService(NotificationService);
-
+        {
             if (Build.VERSION.SdkInt < BuildVersionCodes.O)
             {
                 // Notification channels are new in API 26 (and not a part of the
@@ -124,6 +119,8 @@ namespace MobileApp.Droid
             string channel = "";
             string title = "";
             string largeImg = "";
+            string popupType = "";
+            string tournyID = "";
             Bitmap largeImgBitmap = null;
 
             data.TryGetValue("message", out message);
@@ -145,9 +142,21 @@ namespace MobileApp.Droid
                 largeImgBitmap = BitmapFactory.DecodeResource(Resources, Resource.Drawable.roundlogo);
             }
 
+            var intent = new Intent(this, typeof(MainActivity));
+            //if (data.TryGetValue("popupType", out popupType))
+            //{
+            //    intent.PutExtra("popupType", popupType);
+            //}
+            //if(data.TryGetValue("tournyID", out tournyID))
+            //{
+            //    intent.PutExtra("tournyID", tournyID);
+            //}     
+            intent.PutExtra("popupType", "upcomingTournament");
+            intent.PutExtra("tournyID", "10774");
+            intent.SetFlags(ActivityFlags.ClearTop);
+            var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
 
             var notificationManager = NotificationManager.FromContext(this);
-
             var notificationBuilder = new NotificationCompat.Builder(this, channel)
                 .SetContentTitle(title)
                 .SetSmallIcon(Resource.Drawable.tinyWhiteIcon)
@@ -158,11 +167,6 @@ namespace MobileApp.Droid
                 .SetContentIntent(pendingIntent);
             notificationManager.Notify(0, notificationBuilder.Build());
         }
-
-        //private void BuildNotifications(IDictionary<string, string> data, Intent intent, PendingIntent pendingIntent)
-        //{
-         
-        //}
 
         private Bitmap GetImageBitmapFromUrl(string url)
         {
