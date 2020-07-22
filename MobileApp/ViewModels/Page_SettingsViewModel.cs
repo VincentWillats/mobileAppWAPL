@@ -117,6 +117,15 @@ namespace MobileApp.ViewModels
             }
         }
 
+        private string _AppVersion;
+
+        public string AppVersion
+        {
+            get { return _AppVersion; }
+            set { _AppVersion = value; OnPropertyChanged(); }
+        }
+
+
         public Command SwipedBackCommand { get; }
         public Command EmailCommand { get; }
         public Command CallCommand { get; }
@@ -129,6 +138,7 @@ namespace MobileApp.ViewModels
             CallCommand = new Command(OpenCall);
 
             LoadSettings();
+            AppVersion = $"{VersionTracking.CurrentVersion}";
         }    
 
         private async void OpenEmail()

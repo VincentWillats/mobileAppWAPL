@@ -15,6 +15,7 @@ using Rg.Plugins.Popup.Extensions;
 using System.Collections.Generic;
 using Microsoft.AppCenter.Analytics;
 
+
 namespace MobileApp.Droid
 {
     [Activity(Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -23,8 +24,7 @@ namespace MobileApp.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
-
+            ToolbarResource = Resource.Layout.Toolbar;            
 
             base.OnCreate(savedInstanceState);
 

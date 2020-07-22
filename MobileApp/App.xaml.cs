@@ -11,7 +11,8 @@ namespace MobileApp
     {      
         public App()
         { 
-            InitializeComponent();           
+            InitializeComponent();
+            Xamarin.Essentials.VersionTracking.Track();
             MainPage = new NavigationPage(new MainPage());
         }
 

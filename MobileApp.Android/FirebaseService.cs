@@ -34,8 +34,8 @@ namespace MobileApp.Droid
                                                                             "\"message\":\"$(messagePM)\"," +
                                                                             "\"android_channel_id\":\"$(android_channel_idPM)\"," +
                                                                             "\"image\":\"$(imagePM)\"," +
-                                                                            "\"title\":\"$(titlePM)\"" +
-                                                                            "\"popupType\":\"$(popupTypePM)\"" +
+                                                                            "\"title\":\"$(titlePM)\"," +
+                                                                            "\"popupType\":\"$(popupTypePM)\"," +
                                                                             "\"tournyID\":\"$(tournyIDPM)\"" +
                                                                         "}" +                                                                  
                                                                 "}";
@@ -43,9 +43,9 @@ namespace MobileApp.Droid
         public static string ListenConnectionString { get; set; } = Keys.Keys._ListenConnectionString;
 
 //#if DEBUG
-        public static string[] SubscriptionTags { get; set; } = { "UpcomingTournament", "SpecialOffer", "SpecialEvent", "Result", "Debug" };
+//        public static string[] SubscriptionTags { get; set; } = { "UpcomingTournament", "SpecialOffer", "SpecialEvent", "Result", "Debug" };
 //#else
-//        public static string[] SubscriptionTags { get; set; } = { "UpcomingTournament" , "SpecialOffer", "SpecialEvent", "Result" };
+        public static string[] SubscriptionTags { get; set; } = { "UpcomingTournament" , "SpecialOffer", "SpecialEvent", "Result" };
 //#endif
 
 
@@ -154,8 +154,7 @@ namespace MobileApp.Droid
             {
                 intent.PutExtra("tournyID", tournyID);
             }
-            //intent.PutExtra("popupType", "result");
-            //intent.PutExtra("tournyID", "10773");
+            
             intent.SetFlags(ActivityFlags.ClearTop);
             var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
 
@@ -167,7 +166,10 @@ namespace MobileApp.Droid
                 .SetAutoCancel(true)
                 .SetShowWhen(false)
                 .SetLargeIcon(largeImgBitmap)
-                .SetContentIntent(pendingIntent);
+                .SetContentIntent(pendingIntent)
+                .SetStyle(new NotificationCompat.BigTextStyle().BigText(message));
+
+
             notificationManager.Notify(0, notificationBuilder.Build());
 
             Analytics.TrackEvent("Notifcation Received", new Dictionary<string, string>{
