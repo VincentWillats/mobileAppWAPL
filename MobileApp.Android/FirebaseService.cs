@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using MobileApp.ViewModels;
 using Android.Service.Carrier;
 using Xamarin.Essentials;
+using Microsoft.AppCenter.Analytics;
 
 namespace MobileApp.Droid
 {
@@ -34,6 +35,8 @@ namespace MobileApp.Droid
                                                                             "\"android_channel_id\":\"$(android_channel_idPM)\"," +
                                                                             "\"image\":\"$(imagePM)\"," +
                                                                             "\"title\":\"$(titlePM)\"" +
+                                                                            "\"popupType\":\"$(popupTypePM)\"" +
+                                                                            "\"tournyID\":\"$(tournyIDPM)\"" +
                                                                         "}" +                                                                  
                                                                 "}";
         public static string NotificationHubName { get; set; } = Keys.Keys._NotificationHubName;
@@ -143,16 +146,16 @@ namespace MobileApp.Droid
             }
 
             var intent = new Intent(this, typeof(MainActivity));
-            //if (data.TryGetValue("popupType", out popupType))
-            //{
-            //    intent.PutExtra("popupType", popupType);
-            //}
-            //if(data.TryGetValue("tournyID", out tournyID))
-            //{
-            //    intent.PutExtra("tournyID", tournyID);
-            //}     
-            intent.PutExtra("popupType", "upcomingTournament");
-            intent.PutExtra("tournyID", "10774");
+            if (data.TryGetValue("popupType", out popupType))
+            {
+                intent.PutExtra("popupType", popupType);
+            }
+            if (data.TryGetValue("tournyID", out tournyID))
+            {
+                intent.PutExtra("tournyID", tournyID);
+            }
+            //intent.PutExtra("popupType", "result");
+            //intent.PutExtra("tournyID", "10773");
             intent.SetFlags(ActivityFlags.ClearTop);
             var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
 
@@ -166,6 +169,12 @@ namespace MobileApp.Droid
                 .SetLargeIcon(largeImgBitmap)
                 .SetContentIntent(pendingIntent);
             notificationManager.Notify(0, notificationBuilder.Build());
+
+            Analytics.TrackEvent("Notifcation Received", new Dictionary<string, string>{
+                                                                                        { "Notifcation Type", channel },
+                                                                                        { "Notifcation Title", title },
+                                                                                        { "Notifcation Message", message }
+                                                                                        });
         }
 
         private Bitmap GetImageBitmapFromUrl(string url)

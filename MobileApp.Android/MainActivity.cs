@@ -88,19 +88,16 @@ namespace MobileApp.Droid
                 string tournyID = Intent.GetStringExtra("tournyID");
                 if (!string.IsNullOrWhiteSpace(popupType) || !string.IsNullOrWhiteSpace(tournyID))
                 {
+                    Analytics.TrackEvent("Notification Clicked!", new Dictionary<string, string>
+                                                            {{ "Type of Notification", popupType },
+                                                            { "Tournament ID", tournyID }});
                     switch (popupType)
                     {
                         case "upcomingTournament":
                             await Xamarin.Forms.Application.Current.MainPage.Navigation.PushPopupAsync(new Popup_UpcomingTournaments(tournyID));
-                            Analytics.TrackEvent("Notification Clicked!", new Dictionary<string, string>
-                                                            {{ "Type of Notification", "Upcoming Tournament" },
-                                                            { "Tournament ID", tournyID }});
                             break;
                         case "result":
-                            //OpenUpcomingTournament(tournyID);
-                            Analytics.TrackEvent("Notification Clicked!", new Dictionary<string, string>
-                                                            {{ "Type of Notification", "Tournament Result" },
-                                                            { "Tournament ID", tournyID }});
+                            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushPopupAsync(new Popup_Result(tournyID));
                             break;
                     }                    
                 }

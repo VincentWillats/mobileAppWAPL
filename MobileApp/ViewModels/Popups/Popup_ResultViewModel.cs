@@ -32,6 +32,17 @@ namespace MobileApp.ViewModels
         private Data_Image _imgItemSelected;
         private Data_ResultDetailPlayer _resultSelected;
 
+        private int tournyID;
+        public int TournyID
+        {
+            get { return tournyID; }
+            set
+            {
+                tournyID = value;
+                LoadTournamentDetails();
+            }
+        }
+
         public bool ResultsLoading
         {
             get { return _resultsLoading; }
@@ -126,6 +137,28 @@ namespace MobileApp.ViewModels
 
             SwipedBackCommand = new Command(SwipedBack);
             LoadPage();
+        }
+
+        public Popup_ResultViewModel(string tournyID)
+        {
+            TournyID = int.Parse(tournyID);
+            //CurrentTournament = (Data_Result)selectedItem;
+            ImageList = new ObservableCollection<Data_Image>();
+            ResultPlayerList = new ObservableCollection<Data_ResultDetailPlayer>();
+
+            SwipedBackCommand = new Command(SwipedBack);
+            
+        }
+
+        private async void LoadTournamentDetails()
+        {
+            CurrentTournament = await LoadTournyAsync(tournyID);
+            LoadPage();
+        }
+
+        private async Task<Data_Result> LoadTournyAsync(int tID)
+        {
+            return await Controller_SQL.LoadTournamentResultsAsync(tID);
         }
 
         private async void LoadPage()

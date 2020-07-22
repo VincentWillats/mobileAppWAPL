@@ -24,6 +24,12 @@ namespace MobileApp.Pages.Popups
         {
             BindingContext = new Popup_ResultViewModel(selectedItem);
             InitializeComponent();     
-        }           
+        }
+
+        public Popup_Result(string tournyID)
+        {
+            InitializeComponent();
+            BindingContext = new Popup_ResultViewModel(tournyID);
+        }
     }
 }
